@@ -16,6 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# from django.contrib.auth.views import LogoutView
+
+
+# from recipe_user import views as user_views
+
+
+# from authentication import views as auth_views
+
+# from recipe_app import views as recipe_views
+
+# from notification import views as notifica_views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
