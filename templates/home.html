@@ -1,0 +1,68 @@
+<button><a href="{% url 'home' %}">Home</a></button> |
+<button><a href="{%  url 'logout' %}">Login</a></button>|
+<button><a href="{%  url 'signup' %}">Signup</a></button>|
+<button><a href="{%  url 'logout' %}">Logout</a></button>|
+<button><a href="{%  url 'add_recipe' %}">New Recipe</a></button>|
+<button><a href="/messages/">Messages</a></button> 
+
+
+<br>
+
+<br />
+{% if user.is_authenticated %} Welcome {{user.username }}! 
+{% endif %}
+            
+<ul>
+{% for message in messages %}
+{% comment %} <li>
+<strong><a href="/messages/{{message.id}}">{{message.title}}</a></strong> 
+</li> {% endcomment %}
+{% endfor %}
+
+
+
+
+//////////////  list of recipes 
+{% comment %} ////////// list of recipes {% endcomment %}
+{% comment %} <h3> Messages: {{messages}}</h3>
+
+<br>
+{% for recipe in my_recipes %}
+
+<h4>Recipe : Id:{{recipe.id}}</h4>
+
+<ul>
+
+    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
+    title
+    <strong><li>{{ recipe.title }}</li></strong>
+    
+    <strong><li>{{ recipe.author }}</li></strong>
+
+    <strong><li>{{ recipe.description }}</li></strong>
+    <strong><li>{{ recipe.timerequired }}</li></strong>
+  </li>
+</ul>
+{% endfor %}  {% endcomment %}
+
+
+
+
+
+
+{% comment %} ///////// {% endcomment %}
+
+/////////////////// list of following_recipes
+{% comment %} {% for recipe in following_recipe %}
+
+
+<h4>Recipe : Id:{{recipe.id}}</h4>
+
+<ul>
+
+    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
+    <strong><li>{{ recipe.text }}</li></strong>
+    <strong><li>{{ recipe.created_at }}</li></strong>
+  </li>
+</ul>
+{% endfor %} {% endcomment %}
