@@ -2,7 +2,8 @@ from recipe_app.models import Author
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from recipe_app.models import Message, Recipe
+from recipe_app.models import Recipe
+from recipe_user.models import Message
 # from django.views.generic import TemplateView, View
 
 from django.contrib.auth import login, logout, authenticate
@@ -48,25 +49,29 @@ def recipe_detail_view(request, recipe_id):
 
 def index_view(request):
     return render(
-        request, "index.html", {
-        "recipes": Recipe.objects.all(), "message": Message.objects.all()})
+        request, "home.html", {
+                "recipes": Recipe.objects.all(),
+                "message": Message.objects.all()
+            })
 
-@login_required
-def recipe_detail_view(request):
-    html = "generic_form.html"
-    if request.method == "POST":
-        form = AddRecipeForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            new_recipe = Recipe.objects.create(
-                title=data['title'],
-                description=data['description'],
-                author=data['author']
-            )
-            return HttpResponseRedirect(reverse("homepage"))
+
+# @login_required
+# def recipe_detail_view(request):
+#     html = "generic_form.html"
+#     if request.method == "POST":
+#         form = AddRecipeForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             new_recipe = Recipe.objects.create(
+#                 title=data['title'],
+#                 description=data['description'],
+#                 author=data['author']
+#             )
+#             return HttpResponseRedirect(reverse("homepage"))
         
-    form = AddRecipeForm()
-    return render(request, html, {'form': form})
+#     form = AddRecipeForm()
+#     return render(request, html, {'form': form})
+
 
 @login_required
 def message_view(request):
@@ -75,7 +80,7 @@ def message_view(request):
         form = AddMessageForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            new_message = Message.objects.create(
+            Message.objects.create(
                 text=data['text'],
                 created_at=data['created_at'],
                 author=data['author']

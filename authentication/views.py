@@ -25,7 +25,7 @@ def login_view(request):
                     request.GET.get("next", reverse("home"))
                 )
     form = LoginForm()
-    return render(request, "login.html", {"form": form})
+    return render(request, "generic_view.html", {"form": form})
 
 
 class Signup_view(View):
@@ -33,7 +33,7 @@ class Signup_view(View):
 
     def get(self, request):
         form = SignupForm()
-        return render(request, "signup.html", {"form": form})
+        return render(request, "generic_view.html", {"form": form})
 
     def post(self, request):
         form_class = request.POST
@@ -46,5 +46,5 @@ class Signup_view(View):
                 password=data["password"]
             )
             return HttpResponseRedirect(
-                    request.GET.get("next", reverse("home"))
+                    request.GET.get("next", reverse("homepage"))
                 )
