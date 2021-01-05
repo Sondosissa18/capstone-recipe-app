@@ -63,9 +63,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="tacos.jpg"
                     ),
                 Recipe(
                     title="Pasta",
@@ -76,9 +77,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="pasta.jpg"
                     ),
                 Recipe(
                     title="Sushi",
@@ -89,9 +91,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="sushi.jpg"
                     ),
                 Recipe(
                     title="Fish with salad",
@@ -102,9 +105,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="fish.jpg"
                     ),
                 Recipe(
                     title="Pizza",
@@ -115,9 +119,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="pizza.jpg"
                     ),
                 Recipe(
                     title="Hamburger",
@@ -128,9 +133,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="hamburger.jpg"
                     ),
                 Recipe(
                     title="BBQ Chicken",
@@ -141,9 +147,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="chicken.jpeg"
                     ),
                 Recipe(
                     title="Grilled Tofu",
@@ -154,9 +161,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="tofu.jpg"
                     ),
                 Recipe(
                     title="Omelet",
@@ -167,9 +175,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="Omelet.jpg"
                     ),
                 Recipe(
                     title="Cake",
@@ -180,9 +189,10 @@ class Command(BaseCommand):
                                     cupidatat non proident, sunt in culpa
                                     qui officia deserunt mollit anim id est
                                     laborum.""",
-                    instruction="""Duis aute irure dolor in reprehenderit
+                    instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
+                    image="cake.jpg"
                     )
             ]
         )
