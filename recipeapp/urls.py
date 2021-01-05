@@ -24,11 +24,14 @@ from django.urls import path
 
 # from authentication import views as auth_views
 
-# from recipe_app import views as recipe_views
+from recipe_app import views as recipe_views
 
 # from notification import views as notifica_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', recipe_views.index_view, name="homepage"),
+    path('recipes/', recipe_views.recipe_detail_view, name="recipe_detail_view"),
+    path('message/', recipe_views.message_view, name="message_view"),
+    path('admin/', admin.site.urls)
 ]
