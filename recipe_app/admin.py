@@ -7,9 +7,9 @@ from django.contrib.auth.admin import UserAdmin
 # admin.site.register(Author, CustomUserAdmin)
 
 
-from recipe_app.models import Author, Recipe
+from recipe_app.models import Recipe
 
-admin.site.register(Author)
+
 admin.site.register(Recipe)
 
 

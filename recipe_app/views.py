@@ -25,6 +25,10 @@ from .forms import LoginForm, RegisterForm
 #     form = LoginForm()
 #     return render(request, "login.html", {"form": form})
 
+@login_required()
+def recipe_detail_view(request, recipe_id):
+    my_recipes = Recipe.objects.get(id=recipe_id)
+    return render(request, "recipe_detail.html", {"recipe": my_recipes})
 
 
 # def following_view(request, user_id):
