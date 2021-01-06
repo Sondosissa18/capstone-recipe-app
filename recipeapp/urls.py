@@ -20,15 +20,20 @@ from django.contrib.auth.views import LogoutView
 # from recipe_user import views as user_views
 from authentication import views as auth_views
 from recipe_app import views as recipe_views
-# from notification import views as notifica_views
+from notification import views as notifica_views
 
 
 urlpatterns = [
     path('', recipe_views.index_view, name="homepage"),
-    path('recipes/', recipe_views.recipe_detail_view, name="recipe_detail_view"),
-    path('message/', recipe_views.message_view, name="message_view"),
+    path('recipes/<int:recipe_id>/', recipe_views.recipe_detail_view, name="recipe_detail_view"),
+    path('message/', notifica_views.message_view, name="message_view"),
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
+    # path('results/', recipe_views.SearchView.as_view(), name='search'),
+    path('searchbar/', recipe_views.search_bar, name='searchbar'),
+
+
+
 ]
