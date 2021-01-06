@@ -10,7 +10,7 @@ from .forms import LoginForm, SignupForm
 from django.views.generic import View
 
 
-@login_required
+# @login_required()
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -22,10 +22,10 @@ def login_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(
-                    request.GET.get("next", reverse("home"))
+                    request.GET.get("next", reverse("homepage"))
                 )
     form = LoginForm()
-    return render(request, "generic_view.html", {"form": form})
+    return render(request, "login.html", {"form": form})
 
 
 class Signup_view(View):
@@ -33,7 +33,7 @@ class Signup_view(View):
 
     def get(self, request):
         form = SignupForm()
-        return render(request, "generic_view.html", {"form": form})
+        return render(request, "login.html", {"form": form})
 
     def post(self, request):
         form_class = request.POST
