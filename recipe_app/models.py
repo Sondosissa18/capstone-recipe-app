@@ -9,7 +9,7 @@ class Recipe(models.Model):
     items = models.TextField(max_length=140, default='ingredients')
     timerequired = models.CharField(max_length=100)
     instructions = models.TextField()
-    image = models.ImageField(upload_to="images/", null=True, blank=True)
+    image = models.ImageField(upload_to="media/", null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} - {self.author}"

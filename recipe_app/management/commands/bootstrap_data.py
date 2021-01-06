@@ -1,62 +1,75 @@
 from django.core.management.base import BaseCommand
 from recipe_app.models import Recipe
 from recipe_user.models import Author
+from django.db.utils import IntegrityError
 
 
 class Command(BaseCommand):
     help = "will create some recipes and authors"
 
     def handle(self, *args, **options):
-
-        Author.objects.bulk_create(
-            [
-                Author(
-                    name="Jim",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Sandy",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Kelly",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Ben",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Randy",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Carey",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Jacob",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Sam",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Jill",
-                    bio="Lorem ipsum dolor sit amet."
-                    ),
-                Author(
-                    name="Jennifer",
-                    bio="Lorem ipsum dolor sit amet."
-                    )
-            ]
-        )
+        try:
+            Author.objects.bulk_create(
+                [
+                    Author(
+                        name='Jim',
+                        username="JimBoy102",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name='Sandy',
+                        username="SandyLandy134",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Kelly",
+                        username="KellyWelly240",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Ben",
+                        username="BennyLenny45",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Randy",
+                        username="RandyDandy43",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Carey",
+                        username="CareyPorey34",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Jacob",
+                        username="JacobWacob32",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Sam",
+                        username="SammyWhammy34",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Jill",
+                        username="JillPill56",
+                        bio="Lorem ipsum dolor sit amet."
+                        ),
+                    Author(
+                        name="Jennifer",
+                        username="JenniferWennifer65",
+                        bio="Lorem ipsum dolor sit amet."
+                        )
+                ]
+            )
+        except IntegrityError as e:
+            print(e)
         Recipe.objects.bulk_create(
             [
                 Recipe(
                     title="Tacos",
-                    author="Jill",
+                    author=Author.objects.get(username="JillPill56"),
                     description="These tacos are the best",
                     items="taco shells. beef. lettuce. salsa. onions.",
                     timerequired="""Excepteur sint occaecat
@@ -70,7 +83,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Pasta",
-                    author="Sam",
+                    author=Author.objects.get(username="JillPill56"),
                     description="This pasta will blow your socks off.",
                     items="sauce. meatballs. cheese. pasta.",
                     timerequired="""Excepteur sint occaecat
@@ -84,7 +97,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Sushi",
-                    author="Jacob",
+                    author=Author.objects.get(username="JillPill56"),
                     description="Amazing sushi with wasabi",
                     items="rice. fish. wasabi. cucumber. seaweed.",
                     timerequired="""Excepteur sint occaecat
@@ -98,7 +111,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Fish with salad",
-                    author="Sam",
+                    author=Author.objects.get(username="JacobWacob32"),
                     description="Grilled fish like no other",
                     items="Fish. onion. lettuce. tomato. cucumber. ranch dressing.",
                     timerequired="""Excepteur sint occaecat
@@ -112,7 +125,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Pizza",
-                    author="Kelly",
+                    author=Author.objects.get(username="JacobWacob32"),
                     description="Pizza to die for with pepperoni",
                     items="Crust. cheese. sauce. pepperoni. olives.",
                     timerequired="""Excepteur sint occaecat
@@ -126,7 +139,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Hamburger",
-                    author="Jim",
+                    author=Author.objects.get(username="SammyWhammy34"),
                     description="Juicy burger with cheese",
                     items="Buns. hamburger. cheese. lettuce. pickles.",
                     timerequired="""Excepteur sint occaecat
@@ -140,7 +153,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="BBQ Chicken",
-                    author="Kelly",
+                    author=Author.objects.get(username="JenniferWennifer65"),
                     description="Never ever have you tried chicken like this.",
                     items="BBQ sauce. chicken wings. ",
                     timerequired="""Excepteur sint occaecat
@@ -154,7 +167,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Grilled Tofu",
-                    author="Sandy",
+                    author=Author.objects.get(username="JimBoy102"),
                     description="Never say never until you try this Tofu.",
                     items="Tofu, soy sauce. rice.",
                     timerequired="""Excepteur sint occaecat
@@ -168,7 +181,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Omelet",
-                    author="Sandy",
+                    author=Author.objects.get(username="RandyDandy43"),
                     description="Perfect breakfast to wake up to",
                     items="Eggs. bell pepper. onion. cilantro. sour cream.",
                     timerequired="""Excepteur sint occaecat
@@ -182,7 +195,7 @@ class Command(BaseCommand):
                     ),
                 Recipe(
                     title="Cake",
-                    author="Jim",
+                    author=Author.objects.get(username="BennyLenny45"),
                     description="Jims Cake is for every birthday, and more.",
                     items="Flour. sugar. butter. vanilla. baking powder. raspberry jam.",
                     timerequired="""Excepteur sint occaecat
