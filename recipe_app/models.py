@@ -15,3 +15,12 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.author}"
+
+
+
+
+
+# class Blog(models.Model):
+#     title = models.CharField(max_length=100)
+#     posts =  models.TextField()
+#     code =  models.TextField()

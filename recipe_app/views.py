@@ -8,6 +8,8 @@ from recipe_user.models import Message
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
+from django.views.generic.list import ListView
+
 from .forms import AddRecipeForm, AddMessageForm
 
 # def login_view(request):
@@ -28,8 +30,8 @@ from .forms import AddRecipeForm, AddMessageForm
 
 @login_required()
 def recipe_detail_view(request, recipe_id):
-    my_recipes = Recipe.objects.get(id=recipe_id)
-    return render(request, "recipe_detail.html", {"recipe": my_recipes})
+    my_recipe = Recipe.objects.get(id=recipe_id)
+    return render(request, "recipe_detail.html", {"recipes": my_recipe})
 
 
 # def following_view(request, user_id):
@@ -73,19 +75,33 @@ def index_view(request):
 #     return render(request, html, {'form': form})
 
 
-@login_required
-def message_view(request):
-    html = "generic_form.html"
-    if request.method == "POST":
-        form = AddMessageForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            Message.objects.create(
-                text=data['text'],
-                created_at=data['created_at'],
-                author=data['author']
-            )
-            return HttpResponseRedirect(reverse("homepage"))
+# ///////seeems not correct 
+# @login_required
+# def message_view(request):
+#     html = "generic_form.html"
+#     if request.method == "POST":
+#         form = AddMessageForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             Message.objects.create(
+#                 text=data['text'],
+#                 created_at=data['created_at'],
+#                 author=data['author']
+#             )
+#             return HttpResponseRedirect(reverse("homepage"))
 
-    form = AddMessageForm()
-    return render(request, html, {'form': form})
+#     form = AddMessageForm()
+#     return render(request, html, {'form': form})
+
+
+
+
+
+@login_required
+def search_bar(request):
+    html = "search.html"
+    if request.method == "GET":
+        search = request.GET.get('search')
+        post = Recipe.objects.all().filter(title=search)
+        return render(request, html, {'post': post})
+
