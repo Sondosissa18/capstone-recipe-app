@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'recipe_app',
     'recipe_user',
+    'crispy_forms',
     
 ]
 
