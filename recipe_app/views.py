@@ -11,6 +11,8 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
 # def login_view(request):
 #     if request.method == "POST":
@@ -116,3 +118,14 @@ def search_bar(request):
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
 
+
+def recipe_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'recipe_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'recipe_upload.html')
