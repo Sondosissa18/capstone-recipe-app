@@ -1,0 +1,22 @@
+{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
+<button><a href="{%  url 'logout' %}">Login</a></button>|
+<button><a href="{%  url 'logout' %}">Logout</a></button>|
+<button><a href="{%  url 'add_recipe' %}">Recipe</a></button>|
+<button><a href="/user/{{user.id}}">Profile</a></button>|
+<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+
+
+<h1>Messages Dashboard</h1>
+
+{% for message in messages %}
+
+{{message.text}}
+
+{{message.created_at}}
+
+{{message.author}}
+
+
+
+{% endfor  %}
+
