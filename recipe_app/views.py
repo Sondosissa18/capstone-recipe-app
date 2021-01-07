@@ -48,7 +48,7 @@ def recipe_detail_view(request, recipe_id):
 #         request.user.following.remove(follows)
 #     return HttpResponseRedirect(reverse("home"))
 
-@login_required(login_url="login/")
+@login_required(login_url="/login")
 def index_view(request):
     return render(
         request, "home.html", {

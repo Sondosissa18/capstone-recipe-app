@@ -35,7 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
-    path('signup/', auth_views.Signup_view.as_view(), name="signup"),
+    # path('signup/', auth_views.signup_view, name="signup"),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
     path('searchbar/', recipe_views.search_bar, name='searchbar'),
 ]
