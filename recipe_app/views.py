@@ -119,13 +119,33 @@ def search_bar(request):
         return render(request, html, {'post': post})
 
 
+# def recipe_upload(request):
+#     if request.method == 'POST' and request.FILES['myfile']:
+#         myfile = request.FILES['myfile']
+#         fs = FileSystemStorage()
+#         filename = fs.save(myfile.name, myfile)
+#         uploaded_file_url = fs.url(filename)
+#         return render(request, 'recipe_upload.html', {
+#             'uploaded_file_url': uploaded_file_url
+#         })
+#     form = AddRecipeForm()
+#     return render(request, 'recipe_upload.html', {'form': form})
+
+
 def recipe_upload(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'recipe_upload.html', {
-            'uploaded_file_url': uploaded_file_url
-        })
-    return render(request, 'recipe_upload.html')
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Recipe.objects.create(
+                title=data['title'],
+                author=request.user,
+                description=data['description'],
+                items=data['items'],
+                timerequired=data['timerequired'],
+                instructions=data['instructions'],
+                image=data['image']
+            )
+        return HttpResponseRedirect(reverse('homepage'))
+    form = AddRecipeForm()
+    return render(request, 'recipe_upload.html', {'form': form})
