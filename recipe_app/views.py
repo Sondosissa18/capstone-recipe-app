@@ -105,3 +105,11 @@ def search_bar(request):
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
 
+
+def error_404_view(request, exception):
+        data = {}
+        return render(request, '404.html')
+
+def error_500_view(request):
+        data = {}
+        return render(request,'500.html')

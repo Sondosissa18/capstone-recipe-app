@@ -21,6 +21,8 @@ from django.contrib.auth.views import LogoutView
 from authentication import views as auth_views
 from recipe_app import views as recipe_views
 from notification import views as notifica_views
+from django.conf.urls import handler404, handler500
+
 
 
 urlpatterns = [
@@ -36,4 +38,9 @@ urlpatterns = [
 
 
 
+
 ]
+
+
+handler404 = 'recipe_app.views.error_404_view'
+handler500 = 'recipe_app.views.error_500_view'
