@@ -107,8 +107,11 @@ class IndexView(View):
 #     return render(request, html, {'form': form})
 
 
+def about_view(request):
+    return render(request, "about.html")
 
-@login_required
+
+@login_required()
 def search_bar(request):
     html = "search.html"
     if request.method == "GET":
