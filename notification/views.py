@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from notification.models import Notifications
 from recipe_app.models import Recipe
 from recipe_user.models import Message, Author
+from notification.forms import AddMessageForm
 
 
 
@@ -21,4 +22,12 @@ def message_view(request):
             messages.append(message)
         return render(request, "message.html", {"messages":messages})
     return HttpResponseRedirect(reverse("login"))
+
+
+def new_message_view(request):
+    if request.method == "POST":
+        pass
+    form = AddMessageForm()
+    html = "message_form.html"
+    return render(request, html, {'form': form})
 

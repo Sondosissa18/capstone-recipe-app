@@ -31,6 +31,7 @@ urlpatterns = [
     path('login/', auth_views.login_view, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
+    path('newmessage/', notifica_views.new_message_view, name='message'),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
     path('searchbar/', recipe_views.search_bar, name='searchbar'),
 
