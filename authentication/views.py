@@ -15,9 +15,7 @@ def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         signup_form = SignupForm(request.POST)
-        # breakpoint()
         if Author.objects.filter(username=form.data["username"]).first() == None:
-            # breakpoint()
             if signup_form.is_valid():
                 
                 data = signup_form.cleaned_data

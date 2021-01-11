@@ -113,7 +113,7 @@ def index_view(request):
 
 
 
-@login_required
+@login_required()
 def search_bar(request):
     html = "search.html"
     if request.method == "GET":

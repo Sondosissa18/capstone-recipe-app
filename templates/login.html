@@ -305,15 +305,9 @@
 							<div class="or-seperator"><b>or</b></div>
                             {% csrf_token %} 
                             {{form.as_p}}
-                            {% comment %} {% for field in form.visible_fields %}
-							<div class="form-group">
-								<input type="text" name={{field.name }} class="form-control" placeholder={{ field.name }} required="required">
-							</div>
-                            {% endfor %} {% endcomment %}
+                          
 							<input type="submit" class="btn btn-primary btn-block" value="Login">
-							{% comment %} <div class="form-footer">
-								<a href="#">Forgot Your password?</a>
-							</div> {% endcomment %}
+							
 						</form>
 					</li>
 				</ul>
@@ -329,11 +323,7 @@
                             
                             {% csrf_token %} 
                             {{signup_form.as_p}}
-							{% comment %} {% for field in signup_form.visible_fields  %}
-							<div class="form-group">
-								<input type="text" name={{ field.name }} class="form-control" placeholder={{ field.name }} required="required">
-							</div>
-                            {% endfor %} {% endcomment %}
+							
 							<input type="submit" class="btn btn-primary btn-block" value="Sign up">
 						</form>
 					</li>
