@@ -5,12 +5,15 @@
 <button><a href="{%  url 'add_recipe' %}">New Recipe</a></button>|
 <button><a href="/messages/">Messages</a></button>  {% endcomment %}
 
+
+
+
 <h1>Hey everyone!</h1>
 <br>
 
 <br />
 {% if user.is_authenticated %} Welcome {{user.username }}! 
-{% endif %}
+
 
 <br>
 <center>
@@ -56,9 +59,11 @@
 
     {% comment %} <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
     title {% endcomment %}
+    <img src=" {{ recipe.image.url }}" />
     <strong><li>{{ recipe.title }}</li></strong>
     
     <strong><li>{{ recipe.author }}</li></strong>
+    <strong><li>{{ recipe.items }}</li></strong>
 
     <strong><li>{{ recipe.description }}</li></strong>
     <strong><li>{{ recipe.timerequired }}</li></strong>
@@ -68,7 +73,7 @@
 
 
 
-
+{% endif %}
 
 
 

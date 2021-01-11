@@ -11,6 +11,7 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
+from django.utils.decorators import method_decorator
 
 # def login_view(request):
 #     if request.method == "POST":
@@ -56,18 +57,22 @@ class RecipeDetailView(View):
 #     return HttpResponseRedirect(reverse("home"))
 
 
-# def index_view(request):
-#     return render(
-#         request, "home.html", {
-#                 "recipes": Recipe.objects.all(),
-#                 "message": Message.objects.all()
-#             })
+@login_required(login_url="/login")
+def index_view(request):
+    return render(
+        request, "home.html", {
+                "recipes": Recipe.objects.all(),
+                "message": Message.objects.all()
+            })
 
-class IndexView(View):
-    def get(self, request):
-        return render(request, "home.html", 
-                      {"recipes": Recipe.objects.all(),
-                       "message": Message.objects.all()})
+
+# @login_required()
+# class IndexView(View):
+#     @method_decorator(login_required)
+#     def get(self, request):
+#         return render(request, "home.html", 
+#                       {"recipes": Recipe.objects.all(),
+#                        "message": Message.objects.all()})
 
 
 # @login_required
@@ -108,9 +113,7 @@ class IndexView(View):
 
 
 
-
-
-@login_required
+@login_required()
 def search_bar(request):
     html = "search.html"
     if request.method == "GET":
