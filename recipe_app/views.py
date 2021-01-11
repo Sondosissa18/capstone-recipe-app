@@ -11,7 +11,7 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
-from django.core.files.storage import FileSystemStorage
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
 
 # def login_view(request):
@@ -119,22 +119,10 @@ def search_bar(request):
         return render(request, html, {'post': post})
 
 
-# def recipe_upload(request):
-#     if request.method == 'POST' and request.FILES['myfile']:
-#         myfile = request.FILES['myfile']
-#         fs = FileSystemStorage()
-#         filename = fs.save(myfile.name, myfile)
-#         uploaded_file_url = fs.url(filename)
-#         return render(request, 'recipe_upload.html', {
-#             'uploaded_file_url': uploaded_file_url
-#         })
-#     form = AddRecipeForm()
-#     return render(request, 'recipe_upload.html', {'form': form})
-
-
+# help from Matt with this request.FILES upload. 
 def recipe_upload(request):
     if request.method == "POST":
-        form = AddRecipeForm(request.POST)
+        form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
             Recipe.objects.create(
@@ -146,6 +134,6 @@ def recipe_upload(request):
                 instructions=data['instructions'],
                 image=data['image']
             )
-        return HttpResponseRedirect(reverse('homepage'))
+            return HttpResponseRedirect(reverse('homepage'))
     form = AddRecipeForm()
     return render(request, 'recipe_upload.html', {'form': form})
