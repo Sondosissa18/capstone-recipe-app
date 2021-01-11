@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'recipe_user',
     'crispy_forms',
     
+    
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = "recipe_user.Author"
 
+STATICFILES_DIRS=(
+    BASE_DIR/'static',
+)
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR/'media'
+
+#gmail settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER='recipeapp444@gmail.com'
+EMAIL_HOST_PASSWORD='asdfasdf2!'

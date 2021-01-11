@@ -11,3 +11,5 @@ class AddRecipeForm(forms.Form):
 
 class AddMessageForm(forms.Form):
     text = forms.CharField(max_length=140)
+
+
