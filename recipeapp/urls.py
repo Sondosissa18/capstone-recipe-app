@@ -39,8 +39,12 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
     # path('signup/', auth_views.signup_view, name="signup"),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
-    path('searchbar/', recipe_views.search_bar, name='searchbar'),
-    path('contact/', auth_views.contactview, name='contactview'),
+    # path('searchbar/', recipe_views.search_bar, name='searchbar'),
+    # path('contact/', auth_views.contactview, name='contactview'),
+    
+    path('contact/', auth_views.ContactView.as_view(), name='contactview'),
+    path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
+    
 ]
 
 urlpatterns += staticfiles_urlpatterns()
