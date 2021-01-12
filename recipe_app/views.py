@@ -12,6 +12,7 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
+from django.conf import settings
 from django.utils.decorators import method_decorator
 
 # def login_view(request):
@@ -131,3 +132,22 @@ class SearchBar(LoginRequiredMixin, View):
            
 
 
+
+# help from Matt with this request.FILES upload. 
+def recipe_upload(request):
+    if request.method == "POST":
+        form = AddRecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            Recipe.objects.create(
+                title=data['title'],
+                author=request.user,
+                description=data['description'],
+                items=data['items'],
+                timerequired=data['timerequired'],
+                instructions=data['instructions'],
+                image=data['image']
+            )
+            return HttpResponseRedirect(reverse('homepage'))
+    form = AddRecipeForm()
+    return render(request, 'recipe_upload.html', {'form': form})

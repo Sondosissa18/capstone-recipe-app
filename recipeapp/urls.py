@@ -27,9 +27,8 @@ from recipeapp import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
- 
+
 urlpatterns = [
-    # path('', recipe_views.IndexView.as_view(), name="homepage"),
     path('', recipe_views.index_view, name="homepage"),
     path('recipes/<int:recipe_id>/', recipe_views.RecipeDetailView.as_view(),
          name="recipe_detail_view"),
@@ -37,14 +36,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
     path('logout/', LogoutView.as_view(), name="logout"),
-    # path('signup/', auth_views.signup_view, name="signup"),
+    path('signup/', auth_views.Signup_view.as_view(), name="signup"),
+    path('newmessage/', notifica_views.new_message_view, name='message'),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
-    # path('searchbar/', recipe_views.search_bar, name='searchbar'),
-    # path('contact/', auth_views.contactview, name='contactview'),
-    
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
-    
+    path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
