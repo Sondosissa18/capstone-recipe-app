@@ -6,6 +6,7 @@
 </form> {% endcomment %}
 {% comment %} /////////// {% endcomment %}
 <!DOCTYPE html>
+{% comment %} {% load static %} {% endcomment %}
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -250,12 +251,13 @@
 		}
 	}
 </style>
+
 <script>
 	// Prevent dropdown menu from closing when click inside the form
 	$(document).on("click", ".navbar-right .dropdown-menu", function(e){
 		e.stopPropagation();
 	});
-</script>
+</script> 
 </head> 
 <body>
 <nav class="navbar navbar-default navbar-expand-lg navbar-light">
@@ -271,10 +273,10 @@
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="/">Home</a></li>
-			<li><a href="#">About</a></li>			
+			<li><a href="">Home</a></li>
+			<li><a href="/about/">About</a></li>			
 			<li class="dropdown">
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#">Services <b class="caret"></b></a>
+				<a data-toggle="dropdown" class="dropdown-toggle" href="#">Services<b class="caret"></b></a>
 				<ul class="dropdown-menu">					
 					<li><a href="/">Home</a></li>
 					<li><a href="/message/">Messages</a></li>
@@ -331,9 +333,18 @@
 			</li>
 		</ul>
 	</div>
+<div class="jumbotron jumbotron-fluid bg-dark
+">
+  <div class="jumbotron-background">
+	<img src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2019/02/5_tips_for_shooting_large_food_flat_lays.jpg" class="center" style="width:100%;">
+  </div>
+ </div>
 </nav>
 </body>
-</html>    
+</html>   
+
+
+
 
 
 

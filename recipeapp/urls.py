@@ -38,10 +38,12 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name="logout"),
     # path('signup/', auth_views.Signup_view.as_view(), name="signup"),
     path('newmessage/', notifica_views.new_message_view, name='message'),
+    path('about/', recipe_views.about_view, name="about"),
+    # path('signup/', auth_views.signup_view, name="signup"),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
     path('searchbar/', recipe_views.search_bar, name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-    path('contact/', auth_views.contactview, name='contactview'),
+    path('contact/', auth_views.contactview, name='contactview')
 ]
 
 urlpatterns += staticfiles_urlpatterns()
