@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from recipe_app.models import Recipe
 from recipe_user.models import Message
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
@@ -57,7 +58,7 @@ class RecipeDetailView(View):
 #         request.user.following.remove(follows)
 #     return HttpResponseRedirect(reverse("home"))
 
-
+# 22222
 @login_required(login_url="/login")
 def index_view(request):
     return render(
@@ -67,9 +68,8 @@ def index_view(request):
             })
 
 
-# @login_required()
+
 # class IndexView(View):
-#     @method_decorator(login_required)
 #     def get(self, request):
 #         return render(request, "home.html", 
 #                       {"recipes": Recipe.objects.all(),
@@ -117,13 +117,23 @@ def about_view(request):
     return render(request, "about.html")
 
 
-@login_required()
-def search_bar(request):
-    html = "search.html"
-    if request.method == "GET":
+# @login_required()
+# def search_bar(request):
+#     html = "search.html"
+#     if request.method == "GET":
+#         search = request.GET.get('search')
+#         post = Recipe.objects.all().filter(title=search)
+#         return render(request, html, {'post': post})
+
+
+class SearchBar(LoginRequiredMixin, View):
+    def get(self, request):
+        html = "search.html"
         search = request.GET.get('search')
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
+           
+
 
 
 # help from Matt with this request.FILES upload. 
