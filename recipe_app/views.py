@@ -113,6 +113,9 @@ def index_view(request):
 #     return render(request, html, {'form': form})
 
 
+def about_view(request):
+    return render(request, "about.html")
+
 
 # @login_required()
 # def search_bar(request):
