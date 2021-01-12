@@ -2,10 +2,18 @@
 <html>
     <head>
         <title>Stuff Yo Face</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% comment %} we need to fix the static below. {% endcomment %}
+        {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/> {% endcomment %}
+        {% include "bootstrap.partial" %}
+
     </head>
 
     <body>
     {% block content %}
+
     {% endblock content %}
     </body>
 </html>
