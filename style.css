@@ -1,0 +1,8 @@
+.bg {
+    background-image: url('../background/food_background.jpg');
+    background-size: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

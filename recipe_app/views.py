@@ -4,13 +4,14 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from recipe_app.models import Recipe
 from recipe_user.models import Message
-# from django.views.generic import TemplateView, View
+from django.views.generic import View
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
+from django.utils.decorators import method_decorator
 
 # def login_view(request):
 #     if request.method == "POST":
@@ -28,10 +29,17 @@ from .forms import AddRecipeForm, AddMessageForm
 #     form = LoginForm()
 #     return render(request, "login.html", {"form": form})
 
-@login_required()
-def recipe_detail_view(request, recipe_id):
-    my_recipe = Recipe.objects.get(id=recipe_id)
-    return render(request, "recipe_detail.html", {"recipes": my_recipe})
+# @login_required()
+# def recipe_detail_view(request, recipe_id):
+#     my_recipe = Recipe.objects.get(id=recipe_id)
+#     return render(request, "recipe_detail.html", {"recipes": my_recipe})
+
+
+class RecipeDetailView(View):
+    def get(self, request, recipe_id):
+        my_recipe = Recipe.objects.get(id=recipe_id)
+        return render(request, "recipe_detail.html",
+                      {"recipes": my_recipe})
 
 
 # def following_view(request, user_id):
@@ -39,9 +47,9 @@ def recipe_detail_view(request, recipe_id):
 #         # you cant follow yourself
 #         return HttpResponseRedirect(reverse("home"))
 #     follows = Author.objects.get(id=user_id)
-       
+
 #     allfollowers = request.user.following.all()
-     
+
 #     if follows not in allfollowers:
 #         request.user.following.add(follows)
 #     else:
@@ -49,12 +57,22 @@ def recipe_detail_view(request, recipe_id):
 #     return HttpResponseRedirect(reverse("home"))
 
 
+@login_required(login_url="/login")
 def index_view(request):
     return render(
         request, "home.html", {
                 "recipes": Recipe.objects.all(),
                 "message": Message.objects.all()
             })
+
+
+# @login_required()
+# class IndexView(View):
+#     @method_decorator(login_required)
+#     def get(self, request):
+#         return render(request, "home.html", 
+#                       {"recipes": Recipe.objects.all(),
+#                        "message": Message.objects.all()})
 
 
 # @login_required
@@ -95,9 +113,7 @@ def index_view(request):
 
 
 
-
-
-@login_required
+@login_required()
 def search_bar(request):
     html = "search.html"
     if request.method == "GET":

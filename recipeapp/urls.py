@@ -23,9 +23,15 @@ from recipe_app import views as recipe_views
 from notification import views as notifica_views
 
 
+from recipeapp import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+
 urlpatterns = [
     path('', recipe_views.index_view, name="homepage"),
-    path('recipes/<int:recipe_id>/', recipe_views.recipe_detail_view, name="recipe_detail_view"),
+    path('recipes/<int:recipe_id>/', recipe_views.RecipeDetailView.as_view(),
+         name="recipe_detail_view"),
     path('message/', notifica_views.message_view, name="message_view"),
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
@@ -34,7 +40,8 @@ urlpatterns = [
     path('newmessage/', notifica_views.new_message_view, name='message'),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
     path('searchbar/', recipe_views.search_bar, name='searchbar'),
-
-
-
+    path('contact/', auth_views.contactview, name='contactview'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,8 +12,8 @@ import re
 
 @login_required(login_url="/login")
 def message_view(request):
-    # if not request.user.is_authenticated:
-    #     return HttpResponseRedirect(reverse("login"))
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("login"))
     if request.user.is_authenticated:
         message_filter = Notifications.objects.filter(user=request.user, viewed=False)
         messages = []
