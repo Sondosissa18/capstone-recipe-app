@@ -6,6 +6,7 @@ from recipe_app.models import Recipe
 from recipe_user.models import Message
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from authentication.forms import LoginForm, SignupForm
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
@@ -59,12 +60,16 @@ class RecipeDetailView(View):
 #     return HttpResponseRedirect(reverse("home"))
 
 # 22222
-@login_required(login_url="/login")
+# @login_required(login_url="/login")
 def index_view(request):
+    form = LoginForm()
+    signup_form = SignupForm()
     return render(
         request, "home.html", {
                 "recipes": Recipe.objects.all(),
-                "message": Message.objects.all()
+                "message": Message.objects.all(),
+                "form": form,
+                "signup_form": signup_form
             })
 
 
