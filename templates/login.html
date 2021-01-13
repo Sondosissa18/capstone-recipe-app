@@ -2,15 +2,14 @@
 
 {% block content %}
 
-
 {% include 'navigation.html' %}
 
 		<ul class="nav navbar-nav navbar-right">			
 			<li>
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#">Login</a>
+				<a data-toggle="dropdown" class="dropdown-toggle" href="">Login</a>
 				<ul class="dropdown-menu form-wrapper">					
 					<li>
-						<form method="post">
+						<form method="post" action="/login/">
                         
 							<div class="or-seperator"><b>or</b></div>
                             {% csrf_token %} 
@@ -24,7 +23,7 @@
 				<a href="" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
 				<ul class="dropdown-menu form-wrapper">					
 					<li>
-						<form method="post" enctype="multipart/form-data" action="" >
+						<form method="post" enctype="multipart/form-data" action="/login/">
 
 							<p class="hint-text">Fill in this form to create your account!</p>
                             
@@ -50,6 +49,24 @@
 
 
 
+
+{% comment %} <li>
+				<a href="" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Logout</a>
+				<ul class="dropdown-menu form-wrapper">					
+					<li>
+						<form method="post" enctype="multipart/form-data" action="" >
+
+							<p class="hint-text">Fill in this form to create your account!</p>
+                            
+                            
+                            {% csrf_token %} 
+                            {{signup_form.as_p}}
+							
+							<input type="submit" class="btn btn-primary btn-block" value="Logout ">
+						</form>
+					</li> {% endcomment %}
+
+{% comment %} <button><a href="{%  url 'logout' %}">Logout</a></button> {% endcomment %}
 
 
 
