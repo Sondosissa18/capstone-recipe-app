@@ -1,11 +1,14 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">Recipe</a></button>|
-<button><a href="/user/{{user.id}}">Profile</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'navigation.html' %}
 
 
+<button>
+    <a href="/newmessage/">
+    Create Message</a>
+</button>
 <h1>Messages Dashboard</h1>
 
 {% for message in messages %}
@@ -19,4 +22,6 @@
 
 
 {% endfor  %}
+{% endblock content %}
+
 
