@@ -1,5 +1,8 @@
-{% extends "base.html" %}
-{% load static %}
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% comment %} {% load static %}
+<body style="background-image: url({% static 'img1/foodimage.jpg' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
+
+{% comment %} {% load static %} {% endcomment %}
 
 {% block content %}
 
@@ -79,8 +82,8 @@
 	</div>
 </nav>
 {% load static %}
-<body style="background-image: url({% static 'img1/foodimage.jpg' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/>
-</body>
+{% comment %} <body style="background-image: url({% static 'img1/foodimage.jpg' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> 
+</body> {% endcomment %}
 </html>   
 {% endblock content %} 
 
