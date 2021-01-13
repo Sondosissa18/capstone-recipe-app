@@ -1,8 +1,10 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
-
+{% extends "base.html" %}
 {% load static %}
 
-{% comment %} {% block content %} {% endcomment %}
+{% block content %}
+{% include 'navigation.html' %}
+
+
 <div class="form-group">
     <form enctype="multipart/form-data" method="post" action="">
     {% csrf_token %} {{ form.as_p}}
@@ -11,5 +13,4 @@
     </form>
 <div>
 
-<p><a href="{% url 'homepage' %}">Return to home</a></p>
-{% comment %} {% endblock %} {% endcomment %}
+{% endblock %}
