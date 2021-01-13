@@ -1,12 +1,8 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'signup' %}">Signup</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">New Recipe</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
-
-
+{% block content %}
+{% include 'login.html' %}
 
 <h1>Hey everyone!</h1>
 <br>
@@ -14,7 +10,7 @@
 <br />
 {% if user.is_authenticated %} Welcome {{user.username }}! 
 
-<button><a href="{%  url 'logout' %}">Logout</a></button>
+{% comment %} <button><a href="{%  url 'logout' %}">Logout</a></button> {% endcomment %}
 
 <br>
 <center>
@@ -75,7 +71,7 @@
 
 
 {% endif %}
-
+{% endblock content %} 
 
 
 {% comment %} ////////// list of recipes 

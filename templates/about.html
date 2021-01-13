@@ -1,23 +1,13 @@
-{% comment %} <form method="post" action="">
-  {% csrf_token %} {{ form.as_p}} {% endcomment %}
-  {% comment %} <h2 style="text-align:center">About</h2>
-  <br\>
-  
-  <em style="color:blue;font-size:35px;"> Welcome to Stuff Yo Face website! Glad to share delicious recipes you can make at home.</em>
-  <em style="color:blue;font-size:35px;">On a mission to help you make great meals and enjoy cooking. Discover new recipes and explore different flavors.</em> {% endcomment %}
-  
-{% comment %} </form> {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
-{% comment %} <div class="p-3 mb-2 bg-dark text-white" style="max-width: 18rem;">
-  <div class="card-header" style="text-align:center">About</div>
-  <div class="card-body">
-    <h5 class="card-title" style="text-align:center">Stuff Yo Face</h5>
-    <p class="card-text" style="text-align:center">Welcome! Glad to share delicious recipes you can make at home. 
-    On a mission to help you make great meals and enjoy cooking. Discover new recipes and explore different flavors.</p>
-  </div>
-</div>  {% endcomment %}
+{% block content %}
+{% include 'navigation.html' %}
 
-<!DOCTYPE html>
+
+
+{% comment %} #######################HERE IS THE CARD. BUT IT SCREWS WITH THE NAV {% endcomment %}
+ {% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Bootstrap Card</title>
@@ -28,8 +18,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body> 
- 
+<body>   {% endcomment %}
+
+
+
 <div class="container">
   <h2>About</h2>
   <div class="card-columns">
@@ -42,7 +34,8 @@
   </div>
 </div>
 
-</body>
-</html>
+{% endblock content %} 
+{% comment %} </body>
+</html> {% endcomment %}
 
 
