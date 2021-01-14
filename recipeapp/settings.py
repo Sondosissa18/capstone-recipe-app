@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+from django.contrib.messages import constants as message_constants
+
 
 # Initialise environment variables
 env = environ.Env()
@@ -148,3 +150,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'recipeapp444@gmail.com'
 EMAIL_HOST_PASSWORD = 'asdfasdf2!'
+
+LOGOUT_REDIRECT_URL = 'homepage'
+
+MESSAGE_LEVEL = message_constants.DEBUG

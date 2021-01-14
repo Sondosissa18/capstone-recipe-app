@@ -4,7 +4,7 @@
 
 {% include 'navigation.html' %}
 
-		<ul class="nav navbar-nav navbar-right">			
+		{% comment %} <ul class="nav navbar-nav navbar-right">			
 			<li>
 				<a data-toggle="dropdown" class="dropdown-toggle" href="">Login</a>
 				<ul class="dropdown-menu form-wrapper">					
@@ -38,35 +38,76 @@
 			</li>
 		</ul>
 	</div>
+
+<div class="jumbotron jumbotron-fluid bg-dark
 {% comment %} <div class="jumbotron jumbotron-fluid bg-dark
 ">
   <div class="jumbotron-background">
 	<img src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2019/02/5_tips_for_shooting_large_food_flat_lays.jpg" class="center" style="width:100%;">
   </div>
- </div> {% endcomment %}
-</nav>
+ </div>
+</nav> {% endcomment %}
+{% comment %} style="background-image: url({% static 'img1/img4.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
+
+
+
+{% load static %}
+<style>
+.login_container{
+    background-image: url("{% static 'img1/loginbg.jpg' %}");
+    background-repeat: no-repeat; 
+    filter: blur(3px);
+  -webkit-filter: blur(3px);
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+}
+.my-login-form{
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0, 0.4); 
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 50%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+</style>
+<div class="container login_container">
+ 
+</div>
+<div class="container">
+<div class="my-login-form">
+
+<form method="post" action="/login/">
+<h1 style="font-size:50px">Please Login!!!</h1>
+  <div class="mb-3">
+    
+  {% csrf_token %} 
+{{form.as_p}}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</div>
+</div>
 {% endblock content %} 
 
 
 
-
-{% comment %} <li>
-				<a href="" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Logout</a>
-				<ul class="dropdown-menu form-wrapper">					
-					<li>
-						<form method="post" enctype="multipart/form-data" action="" >
-
-							<p class="hint-text">Fill in this form to create your account!</p>
-                            
-                            
-                            {% csrf_token %} 
-                            {{signup_form.as_p}}
-							
-							<input type="submit" class="btn btn-primary btn-block" value="Logout ">
-						</form>
-					</li> {% endcomment %}
-
-{% comment %} <button><a href="{%  url 'logout' %}">Logout</a></button> {% endcomment %}
 
 
 

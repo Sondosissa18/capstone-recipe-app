@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+
 <nav class="navbar navbar-default navbar-expand-lg navbar-light">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#">STUFF Yo <b>Face</b></a>  		
@@ -22,12 +24,22 @@
 					<li><a href="/">Home</a></li>
 					<li><a href="/message/">Messages</a></li>
 					<li><a href="/recipe-upload/">Add Recipe</a></li>
+					
 				</ul>
 			</li>
 			<li><a href="/messages/">Messages</a></li>
 			<li><a href="/contact/">Contact</a></li>
+			{% if not user.is_authenticated %} 
+			<li><a href="/login/">Login</a></li>
+			<li><a href="/signup/">SignUp</a></li>
+			{% endif %} 
+			{% if user.is_authenticated %} 
+			<li><a href="/logout/">Logout</a></li>
+
+			{% endif %} 
 		</ul>
 		<form class="navbar-form form-inline" action="{% url 'searchbar' %}" method="get">
+		 <form class="navbar-form form-inline" action="" method="get">
 		
 	
 			<div class="input-group search-box">								
@@ -35,6 +47,7 @@
 				<span class="input-group-addon" type="submit"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
-
+</div>
+</nav>
 {% endblock %}
 
