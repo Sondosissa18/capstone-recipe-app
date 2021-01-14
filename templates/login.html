@@ -75,9 +75,8 @@
   width: 50%;
   padding: 20px;
   text-align: center;
-    
-    
 }
+
 
 </style>
 <div class="container login_container">
@@ -95,6 +94,13 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 </div>
 </div>
 {% endblock content %} 
