@@ -36,7 +36,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
     # path('logout/', LogoutView.as_view(), name="logout"),
-    
     path('logout/', auth_views.logout_request, name="logout"),
     path('saved-recipes/', recipe_views.saved_recipe_view, name='saved'),
     path('save/<int:recipe_id>/', recipe_views.save_view, name='save'),

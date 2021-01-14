@@ -86,19 +86,26 @@ def saved_recipe_view(request):
     return render(request, 'saved_recipes.html', {'recipes': recipes})
 
 
-def save_view(request, recipe_id):
+def helper(request, recipe_id, save):
     user = request.user
-    recipe_to_follow = Recipe.objects.filter(id=recipe_id).first()
-    recipe_to_follow.saved.add(user)
-    recipe_to_follow.save()
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+    if save:
+        recipe.saved.add(user)
+        recipe.save()
+    else:
+        recipe.saved.remove(user)
+        recipe.save()
+
+
+def save_view(request, recipe_id):
+    save = True
+    helper(request, recipe_id, save)
     return HttpResponseRedirect(reverse('homepage'))
 
 
 def unsave_view(request, recipe_id):
-    user = request.user
-    recipe_to_follow = Recipe.objects.filter(id=recipe_id).first()
-    recipe_to_follow.saved.remove(user)
-    recipe_to_follow.save()
+    save = False
+    helper(request, recipe_id, save)
     return HttpResponseRedirect(reverse('homepage'))
 
 
@@ -165,8 +172,6 @@ class SearchBar(LoginRequiredMixin, View):
         search = request.GET.get('search')
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
-           
-
 
 
 # help from Matt with this request.FILES upload. 
