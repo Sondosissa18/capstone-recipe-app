@@ -7,6 +7,7 @@ from recipe_user.models import Message
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from authentication.forms import LoginForm, SignupForm
+import random
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
@@ -64,14 +65,22 @@ class RecipeDetailView(View):
 def index_view(request):
     form = LoginForm()
     signup_form = SignupForm()
+    recipes = Recipe.objects.all()
+    how_many = recipes.count()
+    one = random.randint(1, how_many)
+    two = random.randint(1, how_many)
+    three = random.randint(1, how_many)
+    one_recipe = Recipe.objects.get(id=one)
+    two_recipe = Recipe.objects.get(id=two)
+    three_recipe = Recipe.objects.get(id=three)
     return render(
         request, "home.html", {
-                "recipes": Recipe.objects.all(),
-                "message": Message.objects.all(),
+                "one_recipe": one_recipe,
+                "two_recipe": two_recipe,
+                "three_recipe": three_recipe,
                 "form": form,
                 "signup_form": signup_form
             })
-
 
 
 # class IndexView(View):
