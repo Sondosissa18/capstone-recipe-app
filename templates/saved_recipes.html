@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include 'navigation.html' %}
+
+{% for recipe in recipes %}
+<h4>Recipe {{recipe.id}}</h4>
+<ul>
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    <strong><li>{{ recipe.title }}</li></strong>
+    
+    <strong><li>{{ recipe.author }}</li></strong>
+    <strong><li>{{ recipe.items }}</li></strong>
+
+    <strong><li>{{ recipe.description }}</li></strong>
+    <strong><li>{{ recipe.timerequired }}</li></strong>
+  </li>
+</ul>
+
+{% endfor %}
+
+{% endblock content %} 

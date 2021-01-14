@@ -38,7 +38,9 @@ urlpatterns = [
     # path('logout/', LogoutView.as_view(), name="logout"),
     
     path('logout/', auth_views.logout_request, name="logout"),
-
+    path('saved-recipes/', recipe_views.saved_recipe_view, name='saved'),
+    path('save/<int:recipe_id>/', recipe_views.save_view, name='save'),
+    path('unsave/<int:recipe_id>/', recipe_views.unsave_view, name='unsave'),
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
     path('newmessage/', notifica_views.new_message_view, name='message'),
     path('about/', recipe_views.about_view, name="about"),
