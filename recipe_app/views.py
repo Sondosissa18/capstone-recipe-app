@@ -17,6 +17,21 @@ from .forms import AddRecipeForm, AddMessageForm
 from django.conf import settings
 from django.utils.decorators import method_decorator
 
+# def login_view(request):
+#     if request.method == "POST":
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             user = authenticate(
+#                 request, username=data["username"], password=data["password"]
+#             )
+#             if user:
+#                 login(request, user)
+#                 return HttpResponseRedirect(
+#                     request.GET.get("next", reverse("home"))
+#                 )
+#     form = LoginForm()
+#     return render(request, "login.html", {"form": form})
 
 # @login_required()
 # def recipe_detail_view(request, recipe_id):
@@ -31,6 +46,21 @@ class RecipeDetailView(View):
                       {"recipes": my_recipe})
 
 
+# def following_view(request, user_id):
+#     if request.user.id == user_id:
+#         # you cant follow yourself
+#         return HttpResponseRedirect(reverse("home"))
+#     follows = Author.objects.get(id=user_id)
+
+#     allfollowers = request.user.following.all()
+
+#     if follows not in allfollowers:
+#         request.user.following.add(follows)
+#     else:
+#         request.user.following.remove(follows)
+#     return HttpResponseRedirect(reverse("home"))
+
+# 22222
 # @login_required(login_url="/login")
 def index_view(request):
     form = LoginForm()
@@ -53,6 +83,50 @@ def index_view(request):
             })
 
 
+# class IndexView(View):
+#     def get(self, request):
+#         return render(request, "home.html", 
+#                       {"recipes": Recipe.objects.all(),
+#                        "message": Message.objects.all()})
+
+
+# @login_required
+# def recipe_detail_view(request):
+#     html = "generic_form.html"
+#     if request.method == "POST":
+#         form = AddRecipeForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             new_recipe = Recipe.objects.create(
+#                 title=data['title'],
+#                 description=data['description'],
+#                 author=data['author']
+#             )
+#             return HttpResponseRedirect(reverse("homepage"))
+        
+#     form = AddRecipeForm()
+#     return render(request, html, {'form': form})
+
+
+# ///////seeems not correct 
+# @login_required
+# def message_view(request):
+#     html = "generic_form.html"
+#     if request.method == "POST":
+#         form = AddMessageForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             Message.objects.create(
+#                 text=data['text'],
+#                 created_at=data['created_at'],
+#                 author=data['author']
+#             )
+#             return HttpResponseRedirect(reverse("homepage"))
+
+#     form = AddMessageForm()
+#     return render(request, html, {'form': form})
+
+
 def about_view(request):
     return render(request, "about.html")
 
@@ -72,9 +146,11 @@ class SearchBar(LoginRequiredMixin, View):
         search = request.GET.get('search')
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
+           
 
 
-# help from Matt with this request.FILES upload
+
+# help from Matt with this request.FILES upload. 
 def recipe_upload(request):
     if request.method == "POST":
         form = AddRecipeForm(request.POST, request.FILES)
