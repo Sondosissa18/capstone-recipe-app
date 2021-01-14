@@ -61,7 +61,7 @@ class RecipeDetailView(View):
 #     return HttpResponseRedirect(reverse("home"))
 
 # 22222
-# @login_required(login_url="/login")
+@login_required(login_url="/login")
 def index_view(request):
     form = LoginForm()
     signup_form = SignupForm()
@@ -156,7 +156,7 @@ def recipe_upload(request):
         form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
-            Recipe.objects.create(
+            recipe_instance = Recipe.objects.create(
                 title=data['title'],
                 author=request.user,
                 description=data['description'],
@@ -165,6 +165,6 @@ def recipe_upload(request):
                 instructions=data['instructions'],
                 image=data['image']
             )
-            return HttpResponseRedirect(reverse('homepage'))
+            return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
     form = AddRecipeForm()
     return render(request, 'recipe_upload.html', {'form': form})
