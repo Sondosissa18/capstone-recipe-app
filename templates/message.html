@@ -1,22 +1,25 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">Recipe</a></button>|
-<button><a href="/user/{{user.id}}">Profile</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'navigation.html' %}
 
 
-<h1>Messages Dashboard</h1>
+<button>
+    <a href="/newmessage/">
+    Create Message</a>
+</button>
+<h1>Snaps</h1>
 
-{% for message in messages %}
+{% for note in notes %}
 
-{{message.text}}
+{{note.text.text}}
+{{note.text}}
+{{note.created_at}}
 
-{{message.created_at}}
-
-{{message.author}}
+{{note.author}}
 
 
 
 {% endfor  %}
-
+{% endblock content %}

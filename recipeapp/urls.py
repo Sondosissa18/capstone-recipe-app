@@ -32,13 +32,11 @@ urlpatterns = [
     path('', recipe_views.index_view, name="homepage"),
     path('recipes/<int:recipe_id>/', recipe_views.RecipeDetailView.as_view(),
          name="recipe_detail_view"),
-    path('message/', notifica_views.message_view, name="message_view"),
+    path('messages/', notifica_views.message_view, name="message"),
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
     # path('logout/', LogoutView.as_view(), name="logout"),
-    
     path('logout/', auth_views.logout_request, name="logout"),
-
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
     path('newmessage/', notifica_views.new_message_view, name='message'),
     path('about/', recipe_views.about_view, name="about"),
