@@ -19,6 +19,7 @@ def message_view(request):
         messages = []
         for message in message_filter:
             message = Message.objects.get(id=message.recipe_id.id)
+            # Notifications.objects.filter(user=request.user, viewed=False).delete()
             messages.append(message)
         return render(request, "message.html", {"messages":messages})
     return HttpResponseRedirect(reverse("login"))

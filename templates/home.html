@@ -1,29 +1,20 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'signup' %}">Signup</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">New Recipe</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
-
-
+{% block content %}
+{% comment %} {% include 'login.html' %} {% endcomment %}
+{% include 'navigation.html' %}
 
 <h1>Hey everyone!</h1>
 <br>
+{% comment %} {% load static %}
+<div style="background-image: url({% static 'img1/Stuff YO Face.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/>
+
+
+</div> {% endcomment %}
 
 <br />
 {% if user.is_authenticated %} Welcome {{user.username }}! 
-
-
-<br>
-<center>
-<form action="{% url 'searchbar' %}" method="get" >
-    <input type="search" name="search"> 
-    <button type="submit"> Search </button>
-</form>
-
-</center>
-
 
 
 <ul>
@@ -35,91 +26,58 @@
 
 
 
-{% comment %} 
-{% comment %} ///////// show all search result  {% endcomment %}
-{% comment %} {% for result in all_search_results %}
-   {{ result.title}}
-   {{result.description}}
-{% empty %}
-   No results ...
-{% endfor %}  {% endcomment %}
 
 
 
-{% comment %} 
-<h3> Messages: {{messages}}</h3>  {% endcomment %}
-
-
-<br>
-{% for recipe in recipes %}
-
-<h4>Recipe : Id:{{recipe.id}}</h4>
+<h4>Recipe {{one_recipe.id}}</h4>
 
 <ul>
-
-    {% comment %} <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
-    title {% endcomment %}
-    <img src="{{ recipe.image.url }}" />
-    <strong><li>{{ recipe.title }}</li></strong>
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    <strong><li>{{ one_recipe.title }}</li></strong>
     
-    <strong><li>{{ recipe.author }}</li></strong>
-    <strong><li>{{ recipe.items }}</li></strong>
+    <strong><li>{{ one_recipe.author }}</li></strong>
+    <strong><li>{{ one_recipe.items }}</li></strong>
 
-    <strong><li>{{ recipe.description }}</li></strong>
-    <strong><li>{{ recipe.timerequired }}</li></strong>
+    <strong><li>{{ one_recipe.description }}</li></strong>
+    <strong><li>{{ one_recipe.timerequired }}</li></strong>
   </li>
 </ul>
-{% endfor %}  
 
+<h4>Recipe {{two_recipe.id}}</h4>
+<ul>
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    <strong><li>{{ two_recipe.title }}</li></strong>
+    
+    <strong><li>{{ two_recipe.author }}</li></strong>
+    <strong><li>{{ two_recipe.items }}</li></strong>
 
+    <strong><li>{{ two_recipe.description }}</li></strong>
+    <strong><li>{{ two_recipe.timerequired }}</li></strong>
+  </li>
+</ul>
+
+<h4>Recipe {{three_recipe.id}}</h4>
+<ul>
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    <strong><li>{{ three_recipe.title }}</li></strong>
+    
+    <strong><li>{{ three_recipe.author }}</li></strong>
+    <strong><li>{{ three_recipe.items }}</li></strong>
+
+    <strong><li>{{ three_recipe.description }}</li></strong>
+    <strong><li>{{ three_recipe.timerequired }}</li></strong>
+  </li>
+</ul>
 
 {% endif %}
-
-
-
-{% comment %} ////////// list of recipes 
-{% comment %}
-
-<h3> Messages: {{messages}}</h3>
-
-<br>
-{% for recipe in my_recipes %}
-
-<h4>Recipe : Id:{{recipe.id}}</h4>
-
-<ul>
-
-    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
-    title
-    <strong><li>{{ recipe.title }}</li></strong>
-    
-    <strong><li>{{ recipe.author }}</li></strong>
-
-    <strong><li>{{ recipe.description }}</li></strong>
-    <strong><li>{{ recipe.timerequired }}</li></strong>
-  </li>
-</ul>
-{% endfor %}  
+{% endblock content %} 
 
 
 
 
 
 
-{% comment %} ///////// {% endcomment %}
-
-{% comment %} {% for recipe in following_recipe %}
 
 
-<h4>Recipe : Id:{{recipe.id}}</h4>
-
-<ul>
-
-    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
-    <strong><li>{{ recipe.text }}</li></strong>
-    <strong><li>{{ recipe.created_at }}</li></strong>
-  </li>
-</ul>
-{% endfor %} {% endcomment %}
 
 
