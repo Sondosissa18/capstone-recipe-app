@@ -42,26 +42,24 @@ def login_view(request):
     return render(request, "login.html", {"form": form, "signup_form": signup_form})
 
 
-# class Signup_view(View):
-#     form_class = LoginForm
+class Signup_view(View):
+    def get(self, request):
+        signup_form = SignupForm()
+        return render(request, "signup.html", {"signup_form": signup_form})
 
-#     def get(self, request):
-#         signup_form = SignupForm()
-#         return render(request, "login.html", {"signup_form": signup_form})
-
-#     def post(self, request):
-#         form_class = request.POST
-#         form = SignupForm(form_class)
-#         if form.is_valid():
-#             data = form.cleaned_data
-            # Author.objects.create_user(
-            #     username=data["username"], 
-            #     email=data["email"],
-            #     password=data["password"]
-            # )
-            # return HttpResponseRedirect(
-            #         request.GET.get("next", reverse("homepage"))
-            #     )
+    def post(self, request):
+        signup_form = request.POST
+        form = SignupForm(signup_form)
+        if form.is_valid():
+            data = form.cleaned_data
+            Author.objects.create_user(
+                username=data["username"], 
+                email=data["email"],
+                password=data["password"]
+            )
+            return HttpResponseRedirect(
+                    request.GET.get("next", reverse("homepage"))
+                )
 
 
 class ContactView(View):

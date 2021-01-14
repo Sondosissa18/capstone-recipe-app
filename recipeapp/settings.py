@@ -148,3 +148,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'recipeapp444@gmail.com'
 EMAIL_HOST_PASSWORD = 'asdfasdf2!'
+
+LOGOUT_REDIRECT_URL = 'homepage'
