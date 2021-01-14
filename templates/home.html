@@ -25,15 +25,52 @@
 {% endfor %}
 
 
+<br />
 
+<style>
+img {
+  width: 200px;
+  height: 200px;
+}
+</style> 
+<div class="card-deck">
+  <div class="card">
+    <img class="card-img-top" src="{{ one_recipe.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ one_recipe.title }}</h5>
+      <p class="card-text">{{ one_recipe.author }}</p>
+      <p class="card-text">{{ one_recipe.items }}</p>
+      <p class="card-text">{{ one_recipe.description }}</p>
+      <p class="card-text"><small class="text-muted">{{ one_recipe.timerequired }}</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top img" src="{{ two_recipe.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ two_recipe.title }}</h5>
+      <p class="card-text">{{ two_recipe.author }}</p>
+      <p class="card-text">{{ two_recipe.items }}</p>
+      <p class="card-text">{{ two_recipe.description }}</p>
+      <p class="card-text"><small class="text-muted">{{ two_recipe.timerequired }}</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top" src="{{ three_recipe.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ three_recipe.title }}</h5>
+      <p class="card-text">{{ three_recipe.author }}</p>
+      <p class="card-text">{{ three_recipe.items }}</p>
+      <p class="card-text">{{ three_recipe.description }}</p>
+      <p class="card-text"><small class="text-muted">{{ three_recipe.timerequired }}</small></p>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %} 
 
-
-
-<h4>Recipe {{one_recipe.id}}</h4>
-
-<ul>
+{% comment %} <ul>
     {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
-    <strong><li>{{ one_recipe.title }}</li></strong>
+    {% comment %} <strong><li>{{ one_recipe.title }}</li></strong>
     
     <strong><li>{{ one_recipe.author }}</li></strong>
     <strong><li>{{ one_recipe.items }}</li></strong>
@@ -41,11 +78,11 @@
     <strong><li>{{ one_recipe.description }}</li></strong>
     <strong><li>{{ one_recipe.timerequired }}</li></strong>
   </li>
-</ul>
+</ul>  {% endcomment %}
 
-<h4>Recipe {{two_recipe.id}}</h4>
+{% comment %} <h4>Recipe {{two_recipe.id}}</h4>
 <ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> 
     <strong><li>{{ two_recipe.title }}</li></strong>
     
     <strong><li>{{ two_recipe.author }}</li></strong>
@@ -58,7 +95,7 @@
 
 <h4>Recipe {{three_recipe.id}}</h4>
 <ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
+    {% comment %} <img src="{{ one_recipe.image.url }}" /> 
     <strong><li>{{ three_recipe.title }}</li></strong>
     
     <strong><li>{{ three_recipe.author }}</li></strong>
@@ -67,10 +104,7 @@
     <strong><li>{{ three_recipe.description }}</li></strong>
     <strong><li>{{ three_recipe.timerequired }}</li></strong>
   </li>
-</ul>
-
-{% endif %}
-{% endblock content %} 
+</ul> {% endcomment %}
 
 
 
