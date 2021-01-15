@@ -202,3 +202,11 @@ def recipe_upload(request):
             return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
     form = AddRecipeForm()
     return render(request, 'recipe_upload.html', {'form': form})
+
+
+def error_404_view(request, exception):
+    return render(request, '404.html')
+
+
+def error_500_view(request):
+    return render(request, '500.html',  status=500)

@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block content %}
-{% comment %} {% include 'login.html' %} {% endcomment %}
 {% include 'navigation.html' %}
 
 <h1>Hey everyone!</h1>
 <br>
-{% comment %} {% load static %}
-<div style="background-image: url({% static 'img1/Stuff YO Face.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/>
 
-</div> {% endcomment %}
 
 <br />
 {% if user.is_authenticated %} Welcome {{user.username }}! 
+
+{% comment %} {% load static %}
+<body style="background-image: url({% static 'img1/recipeimg.jpg' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
 
 {% if messages %}
   <ul class="messages">
@@ -76,7 +75,7 @@
     <strong><li>{{ three_recipe.timerequired }}</li></strong>
   </li>
 </ul>
-
+{% comment %} </div> {% endcomment %}
 {% endif %}
 {% endblock content %} 
 

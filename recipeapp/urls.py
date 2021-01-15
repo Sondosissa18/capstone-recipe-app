@@ -21,12 +21,10 @@ from django.contrib.auth.views import LogoutView
 from authentication import views as auth_views
 from recipe_app import views as recipe_views
 from notification import views as notifica_views
-from django.conf.urls import handler404, handler500
-
 from recipeapp import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+# from recipe_app import handler500
 
 urlpatterns = [
     path('', recipe_views.index_view, name="homepage"),
@@ -50,12 +48,8 @@ urlpatterns = [
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
 
-]
+handler404 = 'recipe_app.views.error_404_view'
+handler500 = 'recipe_app.views.error_500_view'
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-handler404 = recipe_views.error_404_view
-handler500 = recipe_views.error_500_view
-# urlpatterns += ('recipe_views.error_404_view')
-# urlpatterns += ('recipe_views.error_500_view')
