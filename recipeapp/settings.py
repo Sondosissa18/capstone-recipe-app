@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+from django.contrib.messages import constants as message_constants
+
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,8 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0me@vjutqt^64i5j7io@j)7u8*%wt^c+cf@1t4r_&m1rjchrtm'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -42,6 +48,8 @@ INSTALLED_APPS = [
     'authentication',
     'recipe_app',
     'recipe_user',
+    'crispy_forms'
+    
     
 ]
 
@@ -68,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -127,5 +136,21 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = "recipe_user.Author"
 
+STATICFILES_DIRS = (
+    BASE_DIR/'static',
+)
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR/'media'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'recipeapp444@gmail.com'
+EMAIL_HOST_PASSWORD = 'asdfasdf2!'
+
+LOGOUT_REDIRECT_URL = 'homepage'
+
+MESSAGE_LEVEL = message_constants.DEBUG

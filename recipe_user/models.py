@@ -5,7 +5,8 @@ from django.contrib.auth.models import AbstractUser
 
 class Author(AbstractUser):
     name = models.CharField(max_length=50)
-    bio = models.TextField()
+    bio = models.TextField(null=True, blank=True)
+    email = models.EmailField(max_length=200)
     following = models.ManyToManyField(
         "self",
         blank=True,
