@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}404 Error Page{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Simmer Down Sauce Pan! Recipe Not Found!</h1>
+    <p class="lead">Page is missing or does not exist</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{% url 'homepage' %}" role="button">Go To Home Page</a>
+  </div>
+{% endblock %}
