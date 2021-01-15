@@ -9,7 +9,6 @@ from notification.forms import AddMessageForm
 import re
 
 
-
 @login_required(login_url="/login")
 def message_view(request):
     notes = Notifications.objects.filter(user=request.user, viewed=False)
@@ -28,28 +27,6 @@ def message_view(request):
         notification.viewed = True
         notification.save()
     return save_render
-
-
-
-# def new_message_view(request):
-#     if request.method == "POST":
-#         form = AddMessageForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             text = data['text']
-#             found = re.findall(r'@([A-Za-z0-9_]{1,25})', text)
-#             if found:
-#                 for tag in found:
-#                     matched = Author.objects.get(username=tag)
-#                     if matched:
-#                         Notifications.objects.create(
-#                             text=data['text'],
-#                             user=matched
-#                         )
-#         return HttpResponseRedirect(reverse('homepage'))
-#     form = AddMessageForm()
-#     html = "message_form.html"
-#     return render(request, html, {'form': form})
 
 
 def new_message_view(request):

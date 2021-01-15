@@ -60,19 +60,16 @@ class RecipeDetailView(View):
 #         request.user.following.remove(follows)
 #     return HttpResponseRedirect(reverse("home"))
 
-# 22222
-# @login_required(login_url="/login")
+@login_required(login_url="/login")
 def index_view(request):
     form = LoginForm()
     signup_form = SignupForm()
     recipes = Recipe.objects.all()
-    how_many = recipes.count()
-    one = random.randint(1, how_many)
-    two = random.randint(1, how_many)
-    three = random.randint(1, how_many)
-    one_recipe = Recipe.objects.get(id=one)
-    two_recipe = Recipe.objects.get(id=two)
-    three_recipe = Recipe.objects.get(id=three)
+    db_recipes = recipes.count()
+    randomlist = random.sample(range(1, db_recipes), 3)
+    one_recipe = Recipe.objects.get(id=randomlist[0])
+    two_recipe = Recipe.objects.get(id=randomlist[1])
+    three_recipe = Recipe.objects.get(id=randomlist[2])
     return render(
         request, "home.html", {
                 "one_recipe": one_recipe,
@@ -81,6 +78,35 @@ def index_view(request):
                 "form": form,
                 "signup_form": signup_form
             })
+
+
+def saved_recipe_view(request):
+    user = request.user
+    recipes = user.saved.all()
+    return render(request, 'saved_recipes.html', {'recipes': recipes})
+
+
+def helper(request, recipe_id, save):
+    user = request.user
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+    if save:
+        recipe.saved.add(user)
+        recipe.save()
+    else:
+        recipe.saved.remove(user)
+        recipe.save()
+
+
+def save_view(request, recipe_id):
+    save = True
+    helper(request, recipe_id, save)
+    return HttpResponseRedirect(reverse('homepage'))
+
+
+def unsave_view(request, recipe_id):
+    save = False
+    helper(request, recipe_id, save)
+    return HttpResponseRedirect(reverse('homepage'))
 
 
 # class IndexView(View):
@@ -146,8 +172,16 @@ class SearchBar(LoginRequiredMixin, View):
         search = request.GET.get('search')
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
-           
 
+
+def error_404_view(request, exception):
+    data = {}
+    return render(request, '404.html', data)
+
+
+def error_500_view(request):
+    data = {}
+    return render(request, '500.html', data)
 
 
 # help from Matt with this request.FILES upload. 
@@ -156,7 +190,7 @@ def recipe_upload(request):
         form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
-            Recipe.objects.create(
+            recipe_instance = Recipe.objects.create(
                 title=data['title'],
                 author=request.user,
                 description=data['description'],
@@ -165,6 +199,14 @@ def recipe_upload(request):
                 instructions=data['instructions'],
                 image=data['image']
             )
-            return HttpResponseRedirect(reverse('homepage'))
+            return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
     form = AddRecipeForm()
     return render(request, 'recipe_upload.html', {'form': form})
+
+
+def error_404_view(request, exception):
+    return render(request, '404.html')
+
+
+def error_500_view(request):
+    return render(request, '500.html',  status=500)

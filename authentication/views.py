@@ -67,24 +67,74 @@ def login_view(request):
 #     form = LoginForm()
 #     return render(request, "login.html", {"form": form})
 
+# class Signup_view(View):
+#     def get(self, request):
+#         signup_form = SignupForm()
+#         return render(request, "signup.html", {"signup_form": signup_form})
+
+#     def post(self, request):
+#         signup_form = request.POST
+#         form = SignupForm(signup_form)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             Author.objects.create_user(
+#                 username=data["username"], 
+#                 email=data["email"],
+#                 password=data["password"]
+#             )
+#             return HttpResponseRedirect(
+#                     request.GET.get("next", reverse("homepage"))
+#                 )
+
+# /////testing 
+
+# class Signup_view(View):
+#     def get(self, request):
+#         signup_form = SignupForm()
+#         return render(request, "signup.html", {"signup_form": signup_form}) 
+
+#     def post(self, request):
+#         signup_form = request.POST
+#         form = SignupForm(signup_form)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             user = Author.objects.create_user(
+#                 username=data["username"], 
+#                 email=data["email"],
+#                 password=data["password"]
+#             )
+#            login(request, user)
+#             return HttpResponseRedirect(reverse("homepage"))
+
 class Signup_view(View):
     def get(self, request):
         signup_form = SignupForm()
-        return render(request, "signup.html", {"signup_form": signup_form})
+        return render(request, "signup.html", {"signup_form": signup_form}) 
 
     def post(self, request):
         signup_form = request.POST
         form = SignupForm(signup_form)
         if form.is_valid():
             data = form.cleaned_data
-            Author.objects.create_user(
+            user = Author.objects.create_user(
                 username=data["username"], 
                 email=data["email"],
                 password=data["password"]
             )
+            if user:
+                login(request, user)
+                messages.info(request, "Succefully Created, Welcome to Stuff Yo Face!!!")
+                return HttpResponseRedirect(
+                    request.GET.get("next", reverse("homepage"))
+                )
+            else:
+                messages.error(request, "Unfortunately, there was a problem , Try again..")
+        else:
+            messages.error(request, "Unfortunately, there was a problem , Try again..")
             return HttpResponseRedirect(
                     request.GET.get("next", reverse("homepage"))
                 )
+
 
 
 def logout_request(request):
