@@ -1,19 +1,11 @@
 {% extends "base.html" %}
-
-
 {% block content %}
-
-
 {% include 'navigation.html' %}
-
 
 <h1>This is the recipe details page: {{recipes.title}}</h1>
 {% comment %} <h2>By: <a href="/author/{{recipe.author.id}}/">{{recipe.author.name}}</a></h2> {% endcomment %}
 <h2>Time required for this cake is: {{recipes.timerequired}}</h2>
 <h3>{{recipes.description}}</h3>
-<a href='/unsave/{{ recipes.id }}'>Unfollow</a>
-        
-<a href='/save/{{ recipes.id }}'>Follow</a>
-
-
-{% endblock %}
+<a href='/unsave/{{ recipes.id }}'>UnSave</a>
+<a href='/save/{{ recipes.id }}'>Save</a>
+{% endblock content %}

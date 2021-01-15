@@ -21,21 +21,18 @@ from django.contrib.auth.views import LogoutView
 from authentication import views as auth_views
 from recipe_app import views as recipe_views
 from notification import views as notifica_views
-
-
 from recipeapp import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
+# from recipe_app import handler500
 
 urlpatterns = [
     path('', recipe_views.index_view, name="homepage"),
     path('recipes/<int:recipe_id>/', recipe_views.RecipeDetailView.as_view(),
          name="recipe_detail_view"),
-    path('message/', notifica_views.message_view, name="message_view"),
+    path('messages/', notifica_views.message_view, name="message"),
     path('admin/', admin.site.urls),
     path('login/', auth_views.login_view, name="login"),
-    # path('logout/', LogoutView.as_view(), name="logout"),
     path('logout/', auth_views.logout_request, name="logout"),
     path('saved-recipes/', recipe_views.saved_recipe_view, name='saved'),
     path('save/<int:recipe_id>/', recipe_views.save_view, name='save'),
@@ -43,12 +40,13 @@ urlpatterns = [
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
     path('newmessage/', notifica_views.new_message_view, name='message'),
     path('about/', recipe_views.about_view, name="about"),
-    # path('signup/', auth_views.signup_view, name="signup"),
-    # path('results/', recipe_views.SearchView.as_view(), name='search'),
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-]
 
+]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "recipe_app.views.error_404_view"
+handler500 = "recipe_app.views.error_500_view"
