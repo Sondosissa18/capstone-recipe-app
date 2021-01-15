@@ -7,10 +7,7 @@ name = "pypi"
 django = "*"
 pillow = "*"
 django-crispy-forms = "*"
-<<<<<<< HEAD
-=======
 django-environ = "*"
->>>>>>> compile
 
 [dev-packages]
 

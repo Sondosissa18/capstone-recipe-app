@@ -45,7 +45,7 @@ urlpatterns = [
     path('about/', recipe_views.about_view, name="about"),
     # path('signup/', auth_views.signup_view, name="signup"),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
-    path('searchbar/', recipe_views.search_bar, name='searchbar'),
+    path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
@@ -55,7 +55,7 @@ urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-handler404 = recipe_views.error_404
-handler500 = recipe_views.error_500
+handler404 = recipe_views.error_404_view
+handler500 = recipe_views.error_500_view
 # urlpatterns += ('recipe_views.error_404_view')
 # urlpatterns += ('recipe_views.error_500_view')
