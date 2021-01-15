@@ -174,6 +174,16 @@ class SearchBar(LoginRequiredMixin, View):
         return render(request, html, {'post': post})
 
 
+def error_404_view(request, exception):
+    data = {}
+    return render(request, '404.html', data)
+
+
+def error_500_view(request):
+    data = {}
+    return render(request, '500.html', data)
+
+
 # help from Matt with this request.FILES upload. 
 def recipe_upload(request):
     if request.method == "POST":
