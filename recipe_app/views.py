@@ -62,6 +62,10 @@ class RecipeDetailView(View):
 
 @login_required(login_url="/login")
 def index_view(request):
+    #time 
+    # breakfast = 152134
+    if breakfast: 
+        
     form = LoginForm()
     signup_form = SignupForm()
     recipes = Recipe.objects.all()
