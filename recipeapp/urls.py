@@ -40,7 +40,6 @@ urlpatterns = [
     path('signup/', auth_views.Signup_view.as_view(), name="signup"),
     path('newmessage/', notifica_views.new_message_view, name='message'),
     path('about/', recipe_views.about_view, name="about"),
-    path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),

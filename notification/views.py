@@ -12,10 +12,6 @@ import re
 @login_required(login_url="/login")
 def message_view(request):
     notes = Notifications.objects.filter(user=request.user, viewed=False)
-    count = notes.count()
-    print(count)
-    print(notes)
-    # notifications = list(notes)
     save_render = render(
         request,
         "message.html",
@@ -40,7 +36,6 @@ def new_message_view(request):
             )
             text = new_message.text
             found = re.findall(r'@([A-Za-z0-9_]{1,25})', text)
-            print('&&&&&&&&&', found)
             if found:
                 for tag in found:
                     matched = Author.objects.get(username=tag)
