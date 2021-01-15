@@ -1,5 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
+d{% extends "base.html" %}
 
 {% block content %}
 {% include 'navigation.html' %}
@@ -11,28 +10,52 @@
 .about_container{
   background-image: url("{% static 'img1/loginbg.jpg' %}");
   background-repeat: no-repeat; 
-  filter: blur(0.5px);
-  -webkit-filter: blur(0.5px);
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
   height: 100vh;
   width: 100%;
   background-size: cover;
 }
+
+.about_format{
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0, 0.4); 
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 2;
+  width: 50%;
+  padding: 20px;
+  text-align: center;
+} 
+
+.card-text {
+  font-size:20px;
+}
 </style>
 
 <div class="container about_container">
-  <h2 style="text-align:center">About</h2>
-  <div class="card-columns">
-    <div class="card bg-warning">
+
+</div>
+<div class="container">
+<div class="about_format">
+ <h2 style="text-align:center, color:black">About</h2>
+  <div class="card-columns>
+  </div>
+    <div class="card bg-info">
       <div class="card-body text-center" style="text-align:center">
-        <p class="card-text" style="text-align:center">Welcome! Glad to share delicious recipes you can make at home.</p>
-        <p>On a mission to help you make great meals and enjoy cooking. Discover new recipes and explore different flavors.</p>
+        <p class="card-text" style="color:Goldenrod">Welcome! Glad to share delicious recipes you can make at home.</p>
+        <p class="card-text" style="color:Goldenrod">On a mission to help you make great meals and enjoy cooking. Discover new recipes and explore different flavors.</p>
+        </div>
       </div>
+     </div>
     </div>
   </div>
-</div>
-
 {% endblock content %} 
-{% comment %} </body>
-</html> {% endcomment %}
+
 
 

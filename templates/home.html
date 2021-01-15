@@ -4,7 +4,8 @@
 {% block content %}
 {% comment %} {% include 'login.html' %} {% endcomment %}
 {% include 'navigation.html' %}
-
+{% comment %} {% load static %}
+<body style="background-image: url({% static 'img1/img4.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
 <h1>Hey everyone!</h1>
 <br>
 {% comment %} {% load static %}
