@@ -16,6 +16,7 @@ from django.views.generic.list import ListView
 from .forms import AddRecipeForm, AddMessageForm
 from django.conf import settings
 from django.utils.decorators import method_decorator
+from datetime import datetime
 
 # def login_view(request):
 #     if request.method == "POST":
@@ -60,14 +61,58 @@ class RecipeDetailView(View):
 #         request.user.following.remove(follows)
 #     return HttpResponseRedirect(reverse("home"))
 
+#4-10 breakfast
+# 10-4 16hours lunch
+#4-10 dinner 16-22
+#10-4 snacks 22-4
+# form = LoginForm()
+# signup_form = SignupForm()
+def breakfast(request):
+    pass
+
+
+def lunch(request):
+    lunch_recipes = Recipe.objects.get(category=lunch)
+    ids = []
+    for n in lunch_recipes:
+        ids.append(n.id)
+    print('here are the ids', ids)
+    pass
+
+
+def dinner(request):
+    pass
+
+
+def snacks(request):
+    pass
+
+
 @login_required(login_url="/login")
 def index_view(request):
-    #time 
-    # breakfast = 152134
-    if breakfast: 
-        
-    form = LoginForm()
-    signup_form = SignupForm()
+    now = datetime.now().time()
+    # four_am = now.replace(hour=4, minute=0, second=0, microsecond=0)
+    ten_am = now.replace(hour=10, minute=0, second=0, microsecond=0)
+    four_pm = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    ten_pm = now.replace(hour=22, minute=0, second=0, microsecond=0)
+    # recipes = Recipe.objects.all()
+    print('here is time', now, 'and', ten_am)
+    if now > four_pm and now < ten_pm:
+        lunch_recipes = Recipe.objects.all().filter(category='DINNER')
+        print('here are the lunch', lunch_recipes)
+        ids = []
+        for n in lunch_recipes:
+            ids.append(n.id)
+        print('$$$$$$$$$here are the ids', ids)
+    else:
+        print('something went wrong')
+    # if now > four_am and now < ten_am:
+    #     print('breakfast')
+    # elif now > ten_am and now < four_pm:
+    # elif now > four_pm and now < ten_pm:
+    #     dinner(request)
+    # elif now > ten_pm and now < four_am:
+    #     snacks(request)
     recipes = Recipe.objects.all()
     db_recipes = recipes.count()
     randomlist = random.sample(range(1, db_recipes), 3)
@@ -79,8 +124,8 @@ def index_view(request):
                 "one_recipe": one_recipe,
                 "two_recipe": two_recipe,
                 "three_recipe": three_recipe,
-                "form": form,
-                "signup_form": signup_form
+                # "form": form,
+                # "signup_form": signup_form
             })
 
 
