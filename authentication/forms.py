@@ -13,19 +13,17 @@ from recipe_user.models import Author
 #         model = Author
 #         fields = ('username', 'email')
 
-
-
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(
         attrs = {
             'class':'form-control',
-            'placeholder':'Enter your username....',
+            'placeholder':'Enter your Username....',
         }
     ))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs = {
             'class':'form-control',
-            'placeholder':'Enter your password....',
+            'placeholder':'Enter your Password....',
         }
     ))
 

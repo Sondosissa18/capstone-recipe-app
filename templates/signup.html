@@ -40,7 +40,7 @@
 <div class="container">
 <div class="my-login-form">
 
-<form method="post" enctype="multipart/form-data" action="/login/">
+<form method="post" enctype="multipart/form-data" action="/signup/">
 <h1 style="font-size:50px">SignUp</h1>
   <div class="mb-3">
     
@@ -49,6 +49,13 @@
   </div>
   <button type="submit" class="btn btn-warning btn-block">Submit</button>
 </form>
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 </div>
 </div>
 {% endblock content %} 
