@@ -1,11 +1,10 @@
-<br>
-<center>
-<form action="{% url 'searchbar' %}" method="get" >
-    <input type="search" name="search"> 
-    <button type="submit"> Search </button>
-</form>
+{% extends "base.html" %}
 
-</center>
+{% block content %}
+
+
+{% include 'navigation.html' %}
+<br>
 
 
 {% if post %} 
@@ -17,3 +16,4 @@
     {% else %}
     <center><h1>Nothing found!</h1></center>
 {% endif %}
+{% endblock content %}

@@ -11,17 +11,18 @@ import re
 
 @login_required(login_url="/login")
 def message_view(request):
-    #  if not request.user.is_authenticated:
-    #      return HttpResponseRedirect(reverse("login"))
-    if request.user.is_authenticated:
-        message_filter = Notifications.objects.filter(user=request.user, viewed=False)
-        messages = []
-        for message in message_filter:
-            message = Message.objects.get(id=message.recipe_id.id)
-            # Notifications.objects.filter(user=request.user, viewed=False).delete()
-            messages.append(message)
-        return render(request, "message.html", {"messages":messages})
-    return HttpResponseRedirect(reverse("login"))
+    notes = Notifications.objects.filter(user=request.user, viewed=False)
+    save_render = render(
+        request,
+        "message.html",
+        {
+            "notes": notes,
+        }
+    )
+    for notification in notes:
+        notification.viewed = True
+        notification.save()
+    return save_render
 
 
 def new_message_view(request):
@@ -35,7 +36,6 @@ def new_message_view(request):
             )
             text = new_message.text
             found = re.findall(r'@([A-Za-z0-9_]{1,25})', text)
-            print('&&&&&&&&&', found)
             if found:
                 for tag in found:
                     matched = Author.objects.get(username=tag)
@@ -48,4 +48,3 @@ def new_message_view(request):
     form = AddMessageForm()
     html = "message_form.html"
     return render(request, html, {'form': form})
-

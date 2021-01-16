@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
-
-
 <nav class="navbar navbar-default navbar-expand-lg navbar-light">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#">STUFF Yo <b>Face</b></a>  		
@@ -21,27 +18,23 @@
 			<li class="dropdown">
 			<li><a href="/saved-recipes/">Saved</a></li>
 			<li><a href="/recipe-upload/">New Recipe</a></li>
+            <li><a href="/messages/">UnWrap Messages</a></li>
+
 			</li>
-			<li><a href="/messages/">Messages</a></li>
-			
+            
 			<form class="navbar-form form-inline" action="{% url 'searchbar' %}" method="get">
 		 <form class="navbar-form form-inline" action="" method="get">
-		
-	
 			<div class="input-group search-box">								
 				<input type="search" id="search" name="search" class="form-control" placeholder="Search here...">
 				<span class="input-group-addon" type="submit"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
 		</form>
-		
 		</ul>
 		<div id="navbarCollapse" class="collapse navbar-collapse" style="float:right;">
 		<ul class="nav navbar-nav" style="float:right;">
 		<li><a href="/contact/">Contact</a></li>
-		
 			{% if user.is_authenticated %} 
 			<li><a href="/logout/">Logout</a></li>
-
 			{% endif %} 
 			{% if not user.is_authenticated %} 
 			<li><a href="/login/">Login</a></li>
