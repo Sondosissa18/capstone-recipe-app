@@ -21,8 +21,6 @@ from django.contrib.auth.views import LogoutView
 from authentication import views as auth_views
 from recipe_app import views as recipe_views
 from notification import views as notifica_views
-
-
 from recipeapp import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -45,10 +43,10 @@ urlpatterns = [
     path('about/', recipe_views.about_view, name="about"),
     # path('signup/', auth_views.signup_view, name="signup"),
     # path('results/', recipe_views.SearchView.as_view(), name='search'),
+    path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-]
 
 handler404 = 'recipe_app.views.error_404_view'
 handler500 = 'recipe_app.views.error_500_view'
