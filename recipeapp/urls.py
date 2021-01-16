@@ -47,7 +47,7 @@ urlpatterns = [
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-
+]
 handler404 = 'recipe_app.views.error_404_view'
 handler500 = 'recipe_app.views.error_500_view'
 
