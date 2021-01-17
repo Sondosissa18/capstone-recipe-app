@@ -62,68 +62,6 @@ class RecipeDetailView(View):
 #         request.user.following.remove(follows)
 #     return HttpResponseRedirect(reverse("home"))
 
-#4-10 breakfast
-# 10-4 16hours lunch
-#4-10 dinner 16-22
-#10-4 snacks 22-4
-# form = LoginForm()
-# signup_form = SignupForm()
-# def breakfast(request):
-#     breakfast_recipes = Recipe.objects.all().filter(category='BREAKFAST')
-#     ids = []
-#     for n in breakfast_recipes:
-#         ids.append(n.id)
-#     random_ids = random.sample(ids, 3)
-#     one_recipe = Recipe.objects.get(id=random_ids[0])
-#     two_recipe = Recipe.objects.get(id=random_ids[1])
-#     three_recipe = Recipe.objects.get(id=random_ids[2])
-#     return one_recipe, two_recipe, three_recipe
-
-
-# def lunch(request):
-#     lunch_recipes = Recipe.objects.all().filter(category='LUNCH')
-#     ids = []
-#     for n in lunch_recipes:
-#         ids.append(n.id)
-#     random_ids = random.sample(ids, 3)
-#     print(random_ids)
-#     one_recipe = Recipe.objects.get(id=random_ids[0])
-#     two_recipe = Recipe.objects.get(id=random_ids[1])
-#     three_recipe = Recipe.objects.get(id=random_ids[2])
-#     print(one_recipe)
-#     return render(
-#         request, "home.html", {
-#                 "one_recipe": one_recipe,
-#                 "two_recipe": two_recipe,
-#                 "three_recipe": three_recipe,
-#                 # "form": form,
-#                 # "signup_form": signup_form
-#             })
-
-
-# def dinner(request):
-#     dinner_recipes = Recipe.objects.all().filter(category='DINNER')
-#     ids = []
-#     for n in dinner_recipes:
-#         ids.append(n.id)
-#     random_ids = random.sample(ids, 3)
-#     one_recipe = Recipe.objects.get(id=random_ids[0])
-#     two_recipe = Recipe.objects.get(id=random_ids[1])
-#     three_recipe = Recipe.objects.get(id=random_ids[2])
-#     return one_recipe, two_recipe, three_recipe
-
-
-# def snacks(request):
-#     snack_recipes = Recipe.objects.all().filter(category='SNACKS')
-#     ids = []
-#     for n in snack_recipes:
-#         ids.append(n.id)
-#     random_ids = random.sample(ids, 3)
-#     one_recipe = Recipe.objects.get(id=random_ids[0])
-#     two_recipe = Recipe.objects.get(id=random_ids[1])
-#     three_recipe = Recipe.objects.get(id=random_ids[2])
-#     return one_recipe, two_recipe, three_recipe
-
 
 @login_required(login_url="/login")
 def index_view(request):
