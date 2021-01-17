@@ -2,25 +2,21 @@
 {% load static %}
 
 {% block content %}
+{% comment %} {% include 'login.html' %} {% endcomment %}
 {% include 'navigation.html' %}
+<body>
 
-<h1>Hey everyone!</h1>
+{% comment %} <h1>Hey everyone!</h1> {% endcomment %}
 <br>
+{% comment %} {% load static %}
+<div style="background-image: url({% static 'img1/Stuff YO Face.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/>
 
+
+</div> {% endcomment %}
 
 <br />
 {% if user.is_authenticated %} Welcome {{user.username }}! 
 
-{% comment %} {% load static %}
-<body style="background-image: url({% static 'img1/recipeimg.jpg' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
-
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li class="{{ message.tags }}">{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
 
 <ul>
 {% for message in messages %}
@@ -30,54 +26,91 @@
 {% endfor %}
 
 
-<button>
-<a href="/saved-recipes/">saved</a>
-</button>
+<br />
 
+{% comment %} <h4>Recipe {{one_recipe.id}}</h4> {% endcomment %}
+<html>
+<style>
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Ubuntu', sans-serif;
+}
+img {
+  width: 225px;
+  height: 225px;
+  box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+} 
+.card-body{
+  box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top:auto;
+}
+.card{
+  margin: 10px 10px;
+  width: 225px;
+  height: 225px;
+  text-align: center;
+}
 
-
-<h4>Recipe {{one_recipe.id}}</h4>
-
-<ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
-    <strong><li>{{ one_recipe.title }}</li></strong>
-    
-    <strong><li>{{ one_recipe.author }}</li></strong>
-    <strong><li>{{ one_recipe.items }}</li></strong>
-
-    <strong><li>{{ one_recipe.description }}</li></strong>
-    <strong><li>{{ one_recipe.timerequired }}</li></strong>
-  </li>
-</ul>
-
-<h4>Recipe {{two_recipe.id}}</h4>
-<ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
-    <strong><li>{{ two_recipe.title }}</li></strong>
-    
-    <strong><li>{{ two_recipe.author }}</li></strong>
-    <strong><li>{{ two_recipe.items }}</li></strong>
-
-    <strong><li>{{ two_recipe.description }}</li></strong>
-    <strong><li>{{ two_recipe.timerequired }}</li></strong>
-  </li>
-</ul>
-
-<h4>Recipe {{three_recipe.id}}</h4>
-<ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
-    <strong><li>{{ three_recipe.title }}</li></strong>
-    
-    <strong><li>{{ three_recipe.author }}</li></strong>
-    <strong><li>{{ three_recipe.items }}</li></strong>
-
-    <strong><li>{{ three_recipe.description }}</li></strong>
-    <strong><li>{{ three_recipe.timerequired }}</li></strong>
-  </li>
-</ul>
-{% comment %} </div> {% endcomment %}
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+</style> 
+<div class="container text-center">
+<div class="card-deck">
+  <div class="col-md-4">
+    <div class="card text-center">
+      <img src="{{ one_recipe.image.url }}" class="card-img-top">
+        <div class="card-body">
+          <h4 class="card-title">{{ one_recipe.title }}</h4>
+          <p class="card-text">{{ one_recipe.author }}</p>
+          <p class="card-text">{{ one_recipe.items }}</p>
+          <p class="card-text">{{ one_recipe.description }}</p>
+          {% comment %} <p class="card-text"><small>{{ one_recipe.timerequired }}</small></p> {% endcomment %}
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="card text-center">
+    <img src="{{ two_recipe.image.url }}" class="card-img-top">
+    <div class="card-body">
+      <h4 class="card-title">{{ two_recipe.title }}</h4>
+      <p class="card-text">{{ two_recipe.author }}</p>
+      <p class="card-text">{{ two_recipe.items }}</p>
+      <p class="card-text">{{ two_recipe.description }}</p>
+      {% comment %} <p class="card-text"><small>{{ two_recipe.timerequired }}</small></p> {% endcomment %}
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="card text-center">
+    <img src="{{ three_recipe.image.url }}" class="card-img-top">
+    <div class="card-body">
+      <h4 class="card-title">{{ three_recipe.title }}</h4>
+      <p class="card-text">{{ three_recipe.author }}</p>
+      <p class="card-text">{{ three_recipe.items }}</p>
+      <p class="card-text">{{ three_recipe.description }}</p>
+      {% comment %} <p class="card-text"><small>{{ three_recipe.timerequired }}</small></p> {% endcomment %}
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
 {% endif %}
 {% endblock content %} 
+
+
 
 
 
