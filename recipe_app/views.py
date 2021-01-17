@@ -18,6 +18,7 @@ from django.conf import settings
 from django.utils.decorators import method_decorator
 from datetime import datetime
 
+
 # def login_view(request):
 #     if request.method == "POST":
 #         form = LoginForm(request.POST)
@@ -67,58 +68,98 @@ class RecipeDetailView(View):
 #10-4 snacks 22-4
 # form = LoginForm()
 # signup_form = SignupForm()
-def breakfast(request):
-    pass
+# def breakfast(request):
+#     breakfast_recipes = Recipe.objects.all().filter(category='BREAKFAST')
+#     ids = []
+#     for n in breakfast_recipes:
+#         ids.append(n.id)
+#     random_ids = random.sample(ids, 3)
+#     one_recipe = Recipe.objects.get(id=random_ids[0])
+#     two_recipe = Recipe.objects.get(id=random_ids[1])
+#     three_recipe = Recipe.objects.get(id=random_ids[2])
+#     return one_recipe, two_recipe, three_recipe
 
 
-def lunch(request):
-    lunch_recipes = Recipe.objects.get(category=lunch)
-    ids = []
-    for n in lunch_recipes:
-        ids.append(n.id)
-    print('here are the ids', ids)
-    pass
+# def lunch(request):
+#     lunch_recipes = Recipe.objects.all().filter(category='LUNCH')
+#     ids = []
+#     for n in lunch_recipes:
+#         ids.append(n.id)
+#     random_ids = random.sample(ids, 3)
+#     print(random_ids)
+#     one_recipe = Recipe.objects.get(id=random_ids[0])
+#     two_recipe = Recipe.objects.get(id=random_ids[1])
+#     three_recipe = Recipe.objects.get(id=random_ids[2])
+#     print(one_recipe)
+#     return render(
+#         request, "home.html", {
+#                 "one_recipe": one_recipe,
+#                 "two_recipe": two_recipe,
+#                 "three_recipe": three_recipe,
+#                 # "form": form,
+#                 # "signup_form": signup_form
+#             })
 
 
-def dinner(request):
-    pass
+# def dinner(request):
+#     dinner_recipes = Recipe.objects.all().filter(category='DINNER')
+#     ids = []
+#     for n in dinner_recipes:
+#         ids.append(n.id)
+#     random_ids = random.sample(ids, 3)
+#     one_recipe = Recipe.objects.get(id=random_ids[0])
+#     two_recipe = Recipe.objects.get(id=random_ids[1])
+#     three_recipe = Recipe.objects.get(id=random_ids[2])
+#     return one_recipe, two_recipe, three_recipe
 
 
-def snacks(request):
-    pass
+# def snacks(request):
+#     snack_recipes = Recipe.objects.all().filter(category='SNACKS')
+#     ids = []
+#     for n in snack_recipes:
+#         ids.append(n.id)
+#     random_ids = random.sample(ids, 3)
+#     one_recipe = Recipe.objects.get(id=random_ids[0])
+#     two_recipe = Recipe.objects.get(id=random_ids[1])
+#     three_recipe = Recipe.objects.get(id=random_ids[2])
+#     return one_recipe, two_recipe, three_recipe
 
 
 @login_required(login_url="/login")
 def index_view(request):
     now = datetime.now().time()
-    # four_am = now.replace(hour=4, minute=0, second=0, microsecond=0)
+    four_am = now.replace(hour=4, minute=0, second=0, microsecond=0)
     ten_am = now.replace(hour=10, minute=0, second=0, microsecond=0)
     four_pm = now.replace(hour=16, minute=0, second=0, microsecond=0)
     ten_pm = now.replace(hour=22, minute=0, second=0, microsecond=0)
     # recipes = Recipe.objects.all()
-    print('here is time', now, 'and', ten_am)
-    if now > four_pm and now < ten_pm:
-        lunch_recipes = Recipe.objects.all().filter(category='DINNER')
-        print('here are the lunch', lunch_recipes)
+    if now > four_am and now < ten_am:
+        breakfast_recipes = Recipe.objects.all().filter(category='BREAKFAST')
+        ids = []
+        for n in breakfast_recipes:
+            ids.append(n.id)
+        random_ids = random.sample(ids, 3)
+    elif now > ten_am and now < four_pm:
+        lunch_recipes = Recipe.objects.all().filter(category='LUNCH')
         ids = []
         for n in lunch_recipes:
             ids.append(n.id)
-        print('$$$$$$$$$here are the ids', ids)
-    else:
-        print('something went wrong')
-    # if now > four_am and now < ten_am:
-    #     print('breakfast')
-    # elif now > ten_am and now < four_pm:
-    # elif now > four_pm and now < ten_pm:
-    #     dinner(request)
-    # elif now > ten_pm and now < four_am:
-    #     snacks(request)
-    recipes = Recipe.objects.all()
-    db_recipes = recipes.count()
-    randomlist = random.sample(range(1, db_recipes), 3)
-    one_recipe = Recipe.objects.get(id=randomlist[0])
-    two_recipe = Recipe.objects.get(id=randomlist[1])
-    three_recipe = Recipe.objects.get(id=randomlist[2])
+        random_ids = random.sample(ids, 3)
+    elif now > four_pm and now < ten_pm:
+        dinner_recipes = Recipe.objects.all().filter(category='DINNER')
+        ids = []
+        for n in dinner_recipes:
+            ids.append(n.id)
+        random_ids = random.sample(ids, 3)
+    elif now > ten_pm and now < four_am:
+        snack_recipes = Recipe.objects.all().filter(category='SNACKS')
+        ids = []
+        for n in snack_recipes:
+            ids.append(n.id)
+        random_ids = random.sample(ids, 3)
+    one_recipe = Recipe.objects.get(id=random_ids[0])
+    two_recipe = Recipe.objects.get(id=random_ids[1])
+    three_recipe = Recipe.objects.get(id=random_ids[2])
     return render(
         request, "home.html", {
                 "one_recipe": one_recipe,
