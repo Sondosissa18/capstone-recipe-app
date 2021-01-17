@@ -79,7 +79,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="tacos.jpg"
+                    image="tacos.jpg",
+                    category="DINNER",
                     ),
                 Recipe(
                     title="Pasta",
@@ -93,7 +94,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="pasta.jpg"
+                    image="pasta.jpg",
+                    category="LUNCH"
                     ),
                 Recipe(
                     title="Sushi",
@@ -107,7 +109,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="sushi.jpg"
+                    image="sushi.jpg",
+                    category="DINNER"
                     ),
                 Recipe(
                     title="Fish with salad",
@@ -121,7 +124,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="fish.jpg"
+                    image="fish.jpg",
+                    category="LUNCH"
                     ),
                 Recipe(
                     title="Pizza",
@@ -135,7 +139,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="pizza.jpg"
+                    image="pizza.jpg",
+                    category="LUNCH"
                     ),
                 Recipe(
                     title="Hamburger",
@@ -149,7 +154,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="hamburger.jpg"
+                    image="hamburger.jpg",
+                    category="LUNCH"
                     ),
                 Recipe(
                     title="BBQ Chicken",
@@ -163,7 +169,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="chicken.jpeg"
+                    image="chicken.jpeg",
+                    category="DINNER"
                     ),
                 Recipe(
                     title="Grilled Tofu",
@@ -177,7 +184,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="tofu.jpg"
+                    image="tofu.jpg",
+                    category="DINNER"
                     ),
                 Recipe(
                     title="Omelet",
@@ -191,7 +199,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="Omelet.jpg"
+                    image="Omelet.jpg",
+                    category="BREAKFAST"
                     ),
                 Recipe(
                     title="Cake",
@@ -205,7 +214,8 @@ class Command(BaseCommand):
                     instructions="""Duis aute irure dolor in reprehenderit
                                     in voluptate velit esse cillum dolore eu
                                     fugiat nulla pariatur.""",
-                    image="cake.jpg"
+                    image="cake.jpg",
+                    category="DESSERT"
                     )
-            ]
+               ]
         )

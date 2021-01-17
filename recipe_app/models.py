@@ -11,6 +11,15 @@ class Recipe(models.Model):
     instructions = models.TextField()
     image = models.ImageField(upload_to="media/", null=True, blank=True)
     saved = models.ManyToManyField(Author, related_name='saved')
+    MEAL_CHOICES = (
+        ("BREAKFAST", "Breakfast"),
+        ("LUNCH", "Lunch"),
+        ("DINNER", "Dinner"),
+        ("SNACKS", "snacks"),
+        ("DESSERT", "Dessert"),
+        ("OTHER", "Other"),
+        )
+    category = models.CharField(max_length=10, choices=MEAL_CHOICES)
 
     def __str__(self):
         return f"{self.title} - {self.author}"

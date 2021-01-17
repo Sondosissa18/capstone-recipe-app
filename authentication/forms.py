@@ -2,16 +2,6 @@ from django import forms
 
 from recipe_user.models import Author
 
-# from django.forms import ModelForm
-
-
-
-
-# class SignupForm(ModelForm):
-
-#     class Meta:
-#         model = Author
-#         fields = ('username', 'email')
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=50, widget=forms.TextInput(
