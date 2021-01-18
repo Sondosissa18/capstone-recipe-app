@@ -64,7 +64,7 @@ class Command(BaseCommand):
                 ]
             )
         except IntegrityError as e:
-            print('Disregard this pain in the ass error:', e)
+            print(e)
         Recipe.objects.bulk_create(
             [
                 Recipe(

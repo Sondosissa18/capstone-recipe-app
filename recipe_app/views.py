@@ -16,7 +16,6 @@ from django.utils.decorators import method_decorator
 from datetime import datetime
 
 
-
 class RecipeDetailView(View):
     def get(self, request, recipe_id):
         my_recipe = Recipe.objects.get(id=recipe_id)
