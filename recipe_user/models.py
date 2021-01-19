@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Author(AbstractUser):
     name = models.CharField(max_length=50)
-    bio = models.TextField()
+    bio = models.TextField(null=True, blank=True)
     email = models.EmailField(max_length=200)
     following = models.ManyToManyField(
         "self",
@@ -15,7 +15,9 @@ class Author(AbstractUser):
     notifications = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.name} - {self.bio}"
+        return f"{self.username} "
+                # return f"{self.username} - {self.bio}"
+
 
 
 class Message(models.Model):
@@ -25,3 +27,7 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.text} - {self.author}"
+
+
+
+

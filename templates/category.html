@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include 'navigation.html' %}
+
+<body>
+<style>
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 200vh;
+  background-size: cover;
+}
+h1, h4 {
+  margin-left: 30px;
+}
+</style>
+
+<h1>Here's your selections!!</h1>
+{% for recipe in recipes %}
+<h4>Recipe {{recipe.id}}</h4>
+<ul>
+    <img src="{{ recipe.image.url }}" width="200" height="150"/>  
+    <strong><li>Title: {{ recipe.title }}</li></strong>
+    
+    <strong><li>By: {{ recipe.author }}</li></strong>
+    <strong><li>Items: {{ recipe.items }}</li></strong>
+
+    <strong><li>Description: {{ recipe.description }}</li></strong>
+    <strong><li>Time Required: {{ recipe.timerequired }}</li></strong>
+    <button><a href="/recipes/{{recipe.id}}/">View Recipe</a></button>
+    <button><a href='/unsave/{{ recipe.id }}'>Unsave</a></button>
+  </li>
+</ul>
+</body>
+{% endfor %}
+{% endblock content %}

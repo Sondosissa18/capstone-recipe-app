@@ -1,38 +1,21 @@
-from recipe_app.models import Author
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
-from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from recipe_app.models import Recipe
-from recipe_user.models import Message
+from recipe_user.models import Author
+
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from authentication.forms import LoginForm, SignupForm
+import random
 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.views import LogoutView
 from django.views.generic.list import ListView
 
 from .forms import AddRecipeForm, AddMessageForm
+from django.conf import settings
 from django.utils.decorators import method_decorator
-
-# def login_view(request):
-#     if request.method == "POST":
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             user = authenticate(
-#                 request, username=data["username"], password=data["password"]
-#             )
-#             if user:
-#                 login(request, user)
-#                 return HttpResponseRedirect(
-#                     request.GET.get("next", reverse("home"))
-#                 )
-#     form = LoginForm()
-#     return render(request, "login.html", {"form": form})
-
-# @login_required()
-# def recipe_detail_view(request, recipe_id):
-#     my_recipe = Recipe.objects.get(id=recipe_id)
-#     return render(request, "recipe_detail.html", {"recipes": my_recipe})
+from datetime import datetime
 
 
 class RecipeDetailView(View):
@@ -42,82 +25,146 @@ class RecipeDetailView(View):
                       {"recipes": my_recipe})
 
 
-# def following_view(request, user_id):
-#     if request.user.id == user_id:
-#         # you cant follow yourself
-#         return HttpResponseRedirect(reverse("home"))
-#     follows = Author.objects.get(id=user_id)
-
-#     allfollowers = request.user.following.all()
-
-#     if follows not in allfollowers:
-#         request.user.following.add(follows)
-#     else:
-#         request.user.following.remove(follows)
-#     return HttpResponseRedirect(reverse("home"))
-
-
 @login_required(login_url="/login")
 def index_view(request):
+    recipes = Recipe.objects.all()
+    db_recipes = recipes.count()
+    randomlist = random.sample(range(1, db_recipes), 3)
+    one_recipe = Recipe.objects.get(id=randomlist[0])
+    two_recipe = Recipe.objects.get(id=randomlist[1])
+    three_recipe = Recipe.objects.get(id=randomlist[2])
     return render(
         request, "home.html", {
-                "recipes": Recipe.objects.all(),
-                "message": Message.objects.all()
+                "one_recipe": one_recipe,
+                "two_recipe": two_recipe,
+                "three_recipe": three_recipe,
             })
 
 
-# @login_required()
-# class IndexView(View):
-#     @method_decorator(login_required)
-#     def get(self, request):
-#         return render(request, "home.html", 
-#                       {"recipes": Recipe.objects.all(),
-#                        "message": Message.objects.all()})
+@login_required(login_url="/login")
+def saved_recipe_view(request):
+    user = request.user
+    user_id = request.user.id
+    recipes = user.saved.all()
+    personal_recipes = Recipe.objects.filter(author=user_id)
+    return render(request, 'saved_recipes.html', {'recipes': recipes,
+                                                  'personal_recipes': personal_recipes})
 
 
-# @login_required
-# def recipe_detail_view(request):
-#     html = "generic_form.html"
-#     if request.method == "POST":
-#         form = AddRecipeForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             new_recipe = Recipe.objects.create(
-#                 title=data['title'],
-#                 description=data['description'],
-#                 author=data['author']
-#             )
-#             return HttpResponseRedirect(reverse("homepage"))
-        
-#     form = AddRecipeForm()
-#     return render(request, html, {'form': form})
+def helper(request, recipe_id, save):
+    user = request.user
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+    if save:
+        recipe.saved.add(user)
+        recipe.save()
+    else:
+        recipe.saved.remove(user)
+        recipe.save()
 
 
-# ///////seeems not correct 
-# @login_required
-# def message_view(request):
-#     html = "generic_form.html"
-#     if request.method == "POST":
-#         form = AddMessageForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             Message.objects.create(
-#                 text=data['text'],
-#                 created_at=data['created_at'],
-#                 author=data['author']
-#             )
-#             return HttpResponseRedirect(reverse("homepage"))
-
-#     form = AddMessageForm()
-#     return render(request, html, {'form': form})
+def save_view(request, recipe_id):
+    save = True
+    helper(request, recipe_id, save)
+    return HttpResponseRedirect(reverse('homepage'))
 
 
+def unsave_view(request, recipe_id):
+    save = False
+    helper(request, recipe_id, save)
+    return HttpResponseRedirect(reverse('homepage'))
 
-@login_required()
-def search_bar(request):
-    html = "search.html"
-    if request.method == "GET":
+
+def about_view(request):
+    return render(request, "about.html")
+
+
+def breakfast_view(request):
+    recipes = Recipe.objects.filter(category="BREAKFAST")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def lunch_view(request):
+    recipes = Recipe.objects.filter(category="LUNCH")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def dinner_view(request):
+    recipes = Recipe.objects.filter(category="DINNER")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def dessert_view(request):
+    recipes = Recipe.objects.filter(category="DESSERT")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def snacks_view(request):
+    recipes = Recipe.objects.filter(category="SNACKS")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+class SearchBar(LoginRequiredMixin, View):
+    def get(self, request):
+        html = "search.html"
         search = request.GET.get('search')
         post = Recipe.objects.all().filter(title=search)
         return render(request, html, {'post': post})
 
+
+# help from Matt with this request.FILES upload.
+@login_required(login_url="/login")
+def recipe_upload(request):
+    if request.method == "POST":
+        # my_p = Author.objects.get(user=request.user.username)
+        form = AddRecipeForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            recipe_instance = Recipe.objects.create(
+                title=data['title'],
+                author=request.user,
+                description=data['description'],
+                items=data['items'],
+                timerequired=data['timerequired'],
+                instructions=data['instructions'],
+                image=data['image']
+            )
+            return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
+    form = AddRecipeForm()
+    return render(request, 'recipe_upload.html', {'form': form})
+
+
+def error_404_view(request, exception):
+    return render(request, '404.html')
+
+
+def error_500_view(request):
+    return render(request, '500.html',  status=500)
+
+
+@login_required()
+def edit_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    html = 'generic_view.html'
+    if request.user.id is recipe.author.id or request.user.is_staff:
+        if request.method == "POST":
+            form = AddRecipeForm(request.POST)
+            if form.is_valid():
+                recipe.title = form.data['title']
+                recipe.description = form.data['description']
+                recipe.items = form.data['items']
+                recipe.timerequired = form.data['timerequired']
+                recipe.instructions = form.data['instructions']
+                recipe.save()
+                return HttpResponseRedirect(reverse('recipe_detail_view', kwargs={'recipe_id': recipe_id}))
+        data = {
+            'title': recipe.title,
+            'author': recipe.author,
+            'description': recipe.description,
+            'timerequired': recipe.timerequired,
+            'items': recipe.items,
+            'instructions': recipe.instructions,
+            }
+        form = AddRecipeForm(initial=data)
+        return render(request, html, {'form': form})
+    else:
+        return render(request, 'not_auth.html')
