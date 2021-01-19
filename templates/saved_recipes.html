@@ -3,21 +3,38 @@
 {% block content %}
 {% include 'navigation.html' %}
 
+<h1>Here's your saved recipes!!</h1>
 {% for recipe in recipes %}
 <h4>Recipe {{recipe.id}}</h4>
 <ul>
-    {% comment %} <img src="{{ one_recipe.image.url }}" /> {% endcomment %}
-    <strong><li>{{ recipe.title }}</li></strong>
+    <img src="{{ recipe.image.url }}" width="200" height="150"/>  
+    <strong><li>Title: {{ recipe.title }}</li></strong>
     
-    <strong><li>{{ recipe.author }}</li></strong>
-    <strong><li>{{ recipe.items }}</li></strong>
+    <strong><li>By: {{ recipe.author }}</li></strong>
+    <strong><li>Items: {{ recipe.items }}</li></strong>
 
-    <strong><li>{{ recipe.description }}</li></strong>
-    <strong><li>{{ recipe.timerequired }}</li></strong>
+    <strong><li>Description: {{ recipe.description }}</li></strong>
+    <strong><li>Time Required: {{ recipe.timerequired }}</li></strong>
     <a href='/unsave/{{ recipe.id }}'>Unsave</a>
   </li>
 </ul>
 
 {% endfor %}
 
+<h1>Here's your personal recipes!!</h1>
+{% for personal in personal_recipes %}
+<h4>Recipe {{personal.id}}</h4>
+<ul>
+    <img src="{{ personal.image.url }}" width="200" height="150"/>  
+    <strong><li>Title: {{ personal.title }}</li></strong>
+    
+    <strong><li>By: {{ personal.author }}</li></strong>
+    <strong><li>Items: {{ personal.items }}</li></strong>
+
+    <strong><li>Description: {{ personal.description }}</li></strong>
+    <strong><li>Time Required: {{ personal.timerequired }}</li></strong>
+  </li>
+</ul>
+
+{% endfor %} 
 {% endblock content %} 
