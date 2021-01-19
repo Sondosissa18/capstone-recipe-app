@@ -15,7 +15,9 @@ class Author(AbstractUser):
     notifications = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.name} - {self.bio}"
+        return f"{self.username} "
+                # return f"{self.username} - {self.bio}"
+
 
 
 class Message(models.Model):
@@ -25,3 +27,7 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.text} - {self.author}"
+
+
+
+

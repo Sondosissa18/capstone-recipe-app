@@ -43,8 +43,9 @@ urlpatterns = [
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-
+    path('editrecipe/<int:recipe_id>/', recipe_views.edit_recipe, name='edit_recipe')
 ]
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <nav class="navbar navbar-default navbar-expand-lg navbar-light">
 	<div class="navbar-header">
 		<a class="navbar-brand" href="#">STUFF Yo <b>Face</b></a>  		
@@ -15,12 +16,21 @@
 		<ul class="nav navbar-nav">
 			<li><a href="/">Home</a></li>
 			<li><a href="/about/">About</a></li>			
-			<li class="dropdown">
+			{% comment %} <li class="dropdown"> {% endcomment %}
 			<li><a href="/saved-recipes/">Saved</a></li>
 			<li><a href="/recipe-upload/">New Recipe</a></li>
             <li><a href="/messages/">UnWrap Messages</a></li>
-
+			{% comment %} </li> {% endcomment %}
+			<li class="nav-item dropdown">
+				<a role="button" data-toggle="dropdown" class="dropdown-toggle" data-bs-toggle="dropdown">Meal Categories <b class="caret"></b></a>
+				<ul class="dropdown-menu">					
+					<li><a href="#">Web Design</a></li>
+					<li><a href="#">Web Development</a></li>
+					<li><a href="#">Graphic Design</a></li>
+					<li><a href="#">Digital Marketing</a></li>
+				</ul>
 			</li>
+		
             
 			<form class="navbar-form form-inline" action="{% url 'searchbar' %}" method="get">
 		 <form class="navbar-form form-inline" action="" method="get">
@@ -30,6 +40,7 @@
 			</div>
 		</form>
 		</ul>
+		
 		<div id="navbarCollapse" class="collapse navbar-collapse" style="float:right;">
 		<ul class="nav navbar-nav" style="float:right;">
 		<li><a href="/contact/">Contact</a></li>
@@ -41,6 +52,7 @@
 			<li><a href="/signup/">SignUp</a></li>
 			{% endif %} 
 		</ul>
+	</div>
 </div>
 </nav>
 {% endblock %}

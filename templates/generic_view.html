@@ -1,23 +1,26 @@
-{% comment %} <form action="" method="post">
-    {% csrf_token%}
-    {{form.as_p}}
-    {% if request.path == "/login/" %}
-    <a href="/login/"><button>Login</button></a>
-    <a href="/signup/">Sign Up</a>
-    {% elif request.path == "/signup/" %}
-    <a href="/signup/"><button>Create Account!</button><a>
-    {% else %}
-    <button type="submit" value="submit">Submit</button>
-    {% endif %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'navigation.html' %}
+
+<body>
+<style>
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 120vh;
+  background-size: cover;
+}
+</style>
+<h1>Please add new UnWrap Message!</h1>
+</br></br>
+<form method = "POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
 </form>
- {% endcomment %}
+</body>
 
-
-
-<div class="form-group">
-<form method="post" action="">
-  {% csrf_token %} {{ form.as_p}}
-  <input type="submit" class="btn btn-success" value="Submit" />
-</div>
-</form>
-<div>
+{% endblock content %}
