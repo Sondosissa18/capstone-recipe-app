@@ -6,16 +6,11 @@
 {% include 'navigation.html' %}
 <body>
 
-{% comment %} <h1>Hey everyone!</h1> {% endcomment %}
+<h1>Here are some suggestions!</h1>
 <br>
-{% comment %} {% load static %}
-<div style="background-image: url({% static 'img1/Stuff YO Face.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/>
-
-
-</div> {% endcomment %}
 
 <br />
-{% if user.is_authenticated %} Welcome {{user.username }}! 
+{% if user.is_authenticated %} 
 
 
 <ul>
@@ -40,6 +35,8 @@ img {
   width: 225px;
   height: 225px;
   box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+  border-radius: 50px 20px;
+  {% comment %} border-radius: 50%; {% endcomment %}
 } 
 .card-body{
   box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
@@ -47,6 +44,7 @@ img {
   font-weight: 600;
   text-decoration: none;
   margin-top:auto;
+  {% comment %} border-radius: 50%; {% endcomment %}
 }
 .card{
   margin: 10px 10px;
