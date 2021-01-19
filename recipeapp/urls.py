@@ -43,7 +43,13 @@ urlpatterns = [
     path('contact/', auth_views.ContactView.as_view(), name='contactview'),
     path('searchbar/', recipe_views.SearchBar.as_view(), name='searchbar'),
     path('recipe-upload/', recipe_views.recipe_upload, name='upload'),
-    path('editrecipe/<int:recipe_id>/', recipe_views.edit_recipe, name='edit_recipe')
+    path('editrecipe/<int:recipe_id>/', recipe_views.edit_recipe, name='edit_recipe'),
+    path('breakfast/', recipe_views.breakfast_view, name='breakfast'),
+    path('lunch/', recipe_views.lunch_view, name='lunch'),
+    path('dinner/', recipe_views.dinner_view, name='dinner'),
+    path('snacks/', recipe_views.snacks_view, name='snacks'),
+    path('dessert/', recipe_views.dessert_view, name='dessert')
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -9,7 +9,7 @@
   background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
   background-repeat: no-repeat;
   width: 100%;
-  height: 100vh;
+  height: auto;
   background-size: cover;
 }
 </style>
@@ -32,22 +32,4 @@
 </ul>
 </body>
 {% endfor %}
-
-<h1>Here's your personal recipes!!</h1>
-{% for personal in personal_recipes %}
-<h4>Recipe {{personal.id}}</h4>
-<ul>
-    <img src="{{ personal.image.url }}" width="200" height="150"/>  
-    <strong><li>Title: {{ personal.title }}</li></strong>
-    
-    <strong><li>By: {{ personal.author }}</li></strong>
-    <strong><li>Items: {{ personal.items }}</li></strong>
-
-    <strong><li>Description: {{ personal.description }}</li></strong>
-    <strong><li>Time Required: {{ personal.timerequired }}</li></strong>
-    <button><a href="/recipes/{{personal.id}}/">View Recipe</a></button>
-  </li>
-</ul>
-
-{% endfor %} 
-{% endblock content %} 
+{% endblock content %}

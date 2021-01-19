@@ -27,55 +27,27 @@ class RecipeDetailView(View):
 
 @login_required(login_url="/login")
 def index_view(request):
-    now = datetime.now().time()
-    four_am = now.replace(hour=4, minute=0, second=0, microsecond=0)
-    ten_am = now.replace(hour=10, minute=0, second=0, microsecond=0)
-    four_pm = now.replace(hour=16, minute=0, second=0, microsecond=0)
-    ten_pm = now.replace(hour=22, minute=0, second=0, microsecond=0)
-    # recipes = Recipe.objects.all()
-    if now > four_am and now < ten_am:
-        breakfast_recipes = Recipe.objects.all().filter(category='BREAKFAST')
-        ids = []
-        for n in breakfast_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > ten_am and now < four_pm:
-        lunch_recipes = Recipe.objects.all().filter(category='LUNCH')
-        ids = []
-        for n in lunch_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > four_pm and now < ten_pm:
-        dinner_recipes = Recipe.objects.all().filter(category='DINNER')
-        ids = []
-        for n in dinner_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > ten_pm and now < four_am:
-        snack_recipes = Recipe.objects.all().filter(category='SNACKS')
-        ids = []
-        for n in snack_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    one_recipe = Recipe.objects.get(id=random_ids[0])
-    two_recipe = Recipe.objects.get(id=random_ids[1])
-    three_recipe = Recipe.objects.get(id=random_ids[2])
+    recipes = Recipe.objects.all()
+    db_recipes = recipes.count()
+    randomlist = random.sample(range(1, db_recipes), 3)
+    one_recipe = Recipe.objects.get(id=randomlist[0])
+    two_recipe = Recipe.objects.get(id=randomlist[1])
+    three_recipe = Recipe.objects.get(id=randomlist[2])
     return render(
         request, "home.html", {
                 "one_recipe": one_recipe,
                 "two_recipe": two_recipe,
                 "three_recipe": three_recipe,
-                # "form": form,
-                # "signup_form": signup_form
             })
 
 
+@login_required(login_url="/login")
 def saved_recipe_view(request):
     user = request.user
     user_id = request.user.id
     recipes = user.saved.all()
     personal_recipes = Recipe.objects.filter(author=user_id)
-    return render(request, 'saved_recipes.html', {'recipes': recipes, 
+    return render(request, 'saved_recipes.html', {'recipes': recipes,
                                                   'personal_recipes': personal_recipes})
 
 
@@ -106,6 +78,31 @@ def about_view(request):
     return render(request, "about.html")
 
 
+def breakfast_view(request):
+    recipes = Recipe.objects.filter(category="BREAKFAST")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def lunch_view(request):
+    recipes = Recipe.objects.filter(category="LUNCH")
+    return render(request, 'category.html', {'recipes': recipes})
+    
+
+def dinner_view(request):
+    recipes = Recipe.objects.filter(category="DINNER")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def dessert_view(request):
+    recipes = Recipe.objects.filter(category="DESSERT")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
+def snacks_view(request):
+    recipes = Recipe.objects.filter(category="SNACKS")
+    return render(request, 'category.html', {'recipes': recipes})
+
+
 class SearchBar(LoginRequiredMixin, View):
     def get(self, request):
         html = "search.html"
@@ -114,11 +111,8 @@ class SearchBar(LoginRequiredMixin, View):
         return render(request, html, {'post': post})
 
 
-
-
 # help from Matt with this request.FILES upload.
 @login_required(login_url="/login")
-# @login_required
 def recipe_upload(request):
     if request.method == "POST":
         # my_p = Author.objects.get(user=request.user.username)
@@ -147,13 +141,11 @@ def error_500_view(request):
     return render(request, '500.html',  status=500)
 
 
-
 @login_required()
 def edit_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     html = 'generic_view.html'
-    # breakpoint()
-    if request.user.username is recipe.author.username or request.user.is_staff:
+    if request.user.id is recipe.author.id or request.user.is_staff:
         if request.method == "POST":
             form = AddRecipeForm(request.POST)
             if form.is_valid():
@@ -176,21 +168,3 @@ def edit_recipe(request, recipe_id):
         return render(request, html, {'form': form})
     else:
         return render(request, 'not_auth.html')
-
-#    title = models.CharField(max_length=100)
-#     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-#     description = models.TextField()
-#     items = models.TextField(max_length=140, default='ingredients')
-#     timerequired = models.CharField(max_length=100)
-#     instructions = models.TextField()
-#     image = models.ImageField(upload_to="media/", null=True, blank=True)
-#     saved = models.ManyToManyField(Author, related_name='saved')
-#     MEAL_CHOICES = (
-#         ("BREAKFAST", "Breakfast"),
-#         ("LUNCH", "Lunch"),
-#         ("DINNER", "Dinner"),
-#         ("SNACKS", "snacks"),
-#         ("DESSERT", "Dessert"),
-#         ("OTHER", "Other"),
-#         )
-#     category = models.CharField(max_length=10, choices=MEAL_CHOICES)

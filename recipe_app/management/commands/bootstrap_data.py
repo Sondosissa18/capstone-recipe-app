@@ -14,52 +14,42 @@ class Command(BaseCommand):
                     Author(
                         name='Jim',
                         username="JimBoy102",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name='Sandy',
                         username="SandyLandy134",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Kelly",
                         username="KellyWelly240",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Ben",
                         username="BennyLenny45",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Randy",
                         username="RandyDandy43",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Carey",
                         username="CareyPorey34",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Jacob",
                         username="JacobWacob32",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Sam",
                         username="SammyWhammy34",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Jill",
                         username="JillPill56",
-                        bio="Lorem ipsum dolor sit amet."
                         ),
                     Author(
                         name="Jennifer",
                         username="JenniferWennifer65",
-                        bio="Lorem ipsum dolor sit amet."
                         )
                 ]
             )

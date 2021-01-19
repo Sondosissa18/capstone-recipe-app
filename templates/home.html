@@ -7,8 +7,14 @@
 <body>
 
 <h1>Here are some suggestions!</h1>
-<br>
-
+<h3>Meal Categories</h3>
+<div style="margin-left: 30px;"> 
+    <button><a href="/breakfast/">Breakfast</a></button>
+    <button><a href="/lunch/">Lunch</a></button>
+    <button><a href="/dinner/">Dinner</a></button>
+    <button><a href="/dessert/">Dessert</a></button>
+    <button><a href="/snacks/">Snacks</a></button>
+</div>
 <br />
 {% if user.is_authenticated %} 
 
@@ -23,7 +29,6 @@
 
 <br />
 
-{% comment %} <h4>Recipe {{one_recipe.id}}</h4> {% endcomment %}
 <html>
 <style>
 * {
@@ -52,7 +57,9 @@ img {
   height: 225px;
   text-align: center;
 }
-
+h1, h3 {
+  margin-left: 30px;
+}
  body {
   background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
   background-repeat: no-repeat;
