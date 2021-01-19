@@ -27,15 +27,17 @@ h4 {
 			<li><a href="/recipe-upload/">New Recipe</a></li>
             <li><a href="/messages/">UnWrap Messages</a></li>
 			{% comment %} </li> {% endcomment %}
-			<li class="nav-item dropdown">
-				{% comment %} <a role="button" data-toggle="dropdown" class="dropdown-toggle" data-bs-toggle="dropdown">Meal Categories <b class="caret"></b></a> {% endcomment %}
-				<ul class="dropdown-menu">					
+			{% comment %} <li class="nav-item dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Meal</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">					
 					<li><a href="#">Web Design</a></li>
 					<li><a href="#">Web Development</a></li>
 					<li><a href="#">Graphic Design</a></li>
 					<li><a href="#">Digital Marketing</a></li>
 				</ul>
-			</li>
+			</li> {% endcomment %}
+
+            
 		
             
 			<form class="navbar-form form-inline" action="{% url 'searchbar' %}" method="get">
