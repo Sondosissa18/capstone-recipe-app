@@ -93,9 +93,10 @@ class ContactView(View):
     def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():
-            emailform = form.cleaned_data['emailform']
+            emailform = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
-            messageform = form.cleaned_data['messageform']
-            send_mail(subject, messageform, emailform,['sondosissa18@gmail.com', emailform ])
-            return render(request, "Contactpage.html", {"form": form})
-
+            messageform = form.cleaned_data['message']
+            send_mail(subject, messageform, emailform, ['recipeapp444@gmail.com', emailform])
+            return HttpResponseRedirect(
+                    request.GET.get("next", reverse("homepage"))
+                )

@@ -38,19 +38,9 @@ class SignupForm(forms.Form):
             'placeholder':'Enter your password....',
         }
     ))
-    # bio = forms.CharField(max_length=140, required=False, widget=forms.Textarea(
-    #     attrs = {
-    #         'class':'form-control',
-    #         'placeholder':'Enter your bio....',
-    #     }
-    # ))
+
 
 class ContactForm(forms.Form):
-    emailform = forms.EmailField(required=True)
+    email = forms.EmailField(required=True)
     subject = forms.CharField(required=True)
-    messageform = forms.CharField(widget=forms.Textarea, required=True)
-
-
-
-
-
+    message = forms.CharField(widget=forms.Textarea, required=True)
