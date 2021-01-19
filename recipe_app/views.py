@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from recipe_app.models import Recipe
+from recipe_user.models import Author
+
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from authentication.forms import LoginForm, SignupForm
@@ -110,19 +112,14 @@ class SearchBar(LoginRequiredMixin, View):
         return render(request, html, {'post': post})
 
 
-def error_404_view(request, exception):
-    data = {}
-    return render(request, '404.html', data)
 
 
-def error_500_view(request):
-    data = {}
-    return render(request, '500.html', data)
-
-
-# help from Matt with this request.FILES upload. 
+# help from Matt with this request.FILES upload.
+@login_required(login_url="/login")
+# @login_required
 def recipe_upload(request):
     if request.method == "POST":
+        # my_p = Author.objects.get(user=request.user.username)
         form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data
@@ -146,3 +143,52 @@ def error_404_view(request, exception):
 
 def error_500_view(request):
     return render(request, '500.html',  status=500)
+
+
+
+@login_required()
+def edit_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    html = 'generic_view.html'
+    # breakpoint()
+    if request.user.username is recipe.author.username or request.user.is_staff:
+        if request.method == "POST":
+            form = AddRecipeForm(request.POST)
+            if form.is_valid():
+                recipe.title = form.data['title']
+                recipe.description = form.data['description']
+                recipe.items = form.data['items']
+                recipe.timerequired = form.data['timerequired']
+                recipe.instructions = form.data['instructions']
+                recipe.save()
+                return HttpResponseRedirect(reverse('recipe_detail_view', kwargs={'recipe_id': recipe_id}))
+        data = {
+            'title': recipe.title,
+            'author': recipe.author,
+            'description': recipe.description,
+            'timerequired': recipe.timerequired,
+            'items': recipe.items,
+            'instructions': recipe.instructions,
+            }
+        form = AddRecipeForm(initial=data)
+        return render(request, html, {'form': form})
+    else:
+        return render(request, 'not_auth.html')
+
+#    title = models.CharField(max_length=100)
+#     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+#     description = models.TextField()
+#     items = models.TextField(max_length=140, default='ingredients')
+#     timerequired = models.CharField(max_length=100)
+#     instructions = models.TextField()
+#     image = models.ImageField(upload_to="media/", null=True, blank=True)
+#     saved = models.ManyToManyField(Author, related_name='saved')
+#     MEAL_CHOICES = (
+#         ("BREAKFAST", "Breakfast"),
+#         ("LUNCH", "Lunch"),
+#         ("DINNER", "Dinner"),
+#         ("SNACKS", "snacks"),
+#         ("DESSERT", "Dessert"),
+#         ("OTHER", "Other"),
+#         )
+#     category = models.CharField(max_length=10, choices=MEAL_CHOICES)
