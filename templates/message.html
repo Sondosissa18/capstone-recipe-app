@@ -13,7 +13,7 @@
   height: 100vh;
   background-size: cover;
 }
-h1, button {
+h1, button, h4{
   margin-left: 30px;
 }
 </style>
@@ -25,10 +25,9 @@ h1, button {
 </button>
 
 {% for note in notes %}
-<h1>This message was sent by {{note.user.username}}</h1>
-{{note.text.author.username}}
-{{note.text.text}}
-{{note.created_at}}
+<h1>This message was sent by {{note.text.author.username}}</h1>
+<h4>Message: {{note.text.text}}</h4>
+<h4>Created At: {{note.created_at}}</h4>
 
 </body>
 {% endfor  %}
