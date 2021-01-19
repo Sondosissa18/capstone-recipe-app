@@ -9,7 +9,7 @@
   background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
   background-repeat: no-repeat;
   width: 100%;
-  height: 200vh;
+  height: 350vh;
   background-size: cover;
 }
 h1, h4 {
@@ -30,7 +30,7 @@ h1, h4 {
     <strong><li>Description: {{ recipe.description }}</li></strong>
     <strong><li>Time Required: {{ recipe.timerequired }}</li></strong>
     <button><a href="/recipes/{{recipe.id}}/">View Recipe</a></button>
-    <button><a href='/unsave/{{ recipe.id }}'>Unsave</a></button>
+    <button><a href='/save/{{ recipe.id }}'>Save</a></button>
   </li>
 </ul>
 </body>
