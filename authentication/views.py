@@ -117,7 +117,7 @@ class Signup_view(View):
         if form.is_valid():
             data = form.cleaned_data
             user = Author.objects.create_user(
-                username=data["username"], 
+                username=data["username"],
                 email=data["email"],
                 password=data["password"]
             )

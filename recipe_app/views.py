@@ -25,46 +25,17 @@ class RecipeDetailView(View):
 
 @login_required(login_url="/login")
 def index_view(request):
-    now = datetime.now().time()
-    four_am = now.replace(hour=4, minute=0, second=0, microsecond=0)
-    ten_am = now.replace(hour=10, minute=0, second=0, microsecond=0)
-    four_pm = now.replace(hour=16, minute=0, second=0, microsecond=0)
-    ten_pm = now.replace(hour=22, minute=0, second=0, microsecond=0)
-    # recipes = Recipe.objects.all()
-    if now > four_am and now < ten_am:
-        breakfast_recipes = Recipe.objects.all().filter(category='BREAKFAST')
-        ids = []
-        for n in breakfast_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > ten_am and now < four_pm:
-        lunch_recipes = Recipe.objects.all().filter(category='LUNCH')
-        ids = []
-        for n in lunch_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > four_pm and now < ten_pm:
-        dinner_recipes = Recipe.objects.all().filter(category='DINNER')
-        ids = []
-        for n in dinner_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    elif now > ten_pm and now < four_am:
-        snack_recipes = Recipe.objects.all().filter(category='SNACKS')
-        ids = []
-        for n in snack_recipes:
-            ids.append(n.id)
-        random_ids = random.sample(ids, 3)
-    one_recipe = Recipe.objects.get(id=random_ids[0])
-    two_recipe = Recipe.objects.get(id=random_ids[1])
-    three_recipe = Recipe.objects.get(id=random_ids[2])
+    recipes = Recipe.objects.all()
+    db_recipes = recipes.count()
+    randomlist = random.sample(range(1, db_recipes), 3)
+    one_recipe = Recipe.objects.get(id=randomlist[0])
+    two_recipe = Recipe.objects.get(id=randomlist[1])
+    three_recipe = Recipe.objects.get(id=randomlist[2])
     return render(
         request, "home.html", {
                 "one_recipe": one_recipe,
                 "two_recipe": two_recipe,
                 "three_recipe": three_recipe,
-                # "form": form,
-                # "signup_form": signup_form
             })
 
 
@@ -134,6 +105,7 @@ def recipe_upload(request):
                 instructions=data['instructions'],
                 image=data['image']
             )
+            breakpoint()
             return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
     form = AddRecipeForm()
     return render(request, 'recipe_upload.html', {'form': form})
