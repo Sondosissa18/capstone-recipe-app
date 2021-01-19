@@ -1,21 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from recipe_app.models import Recipe
-from recipe_user.models import Author
-
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from authentication.forms import LoginForm, SignupForm
+from .forms import AddRecipeForm
 import random
-
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.views import LogoutView
-from django.views.generic.list import ListView
-
-from .forms import AddRecipeForm, AddMessageForm
-from django.conf import settings
-from django.utils.decorators import method_decorator
-from datetime import datetime
 
 
 class RecipeDetailView(View):
@@ -111,11 +100,9 @@ class SearchBar(LoginRequiredMixin, View):
         return render(request, html, {'post': post})
 
 
-# help from Matt with this request.FILES upload.
 @login_required(login_url="/login")
 def recipe_upload(request):
     if request.method == "POST":
-        # my_p = Author.objects.get(user=request.user.username)
         form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             data = form.cleaned_data

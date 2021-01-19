@@ -16,8 +16,6 @@ class Author(AbstractUser):
 
     def __str__(self):
         return f"{self.username} "
-                # return f"{self.username} - {self.bio}"
-
 
 
 class Message(models.Model):
@@ -27,7 +25,3 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.text} - {self.author}"
-
-
-
-
