@@ -86,7 +86,7 @@ def breakfast_view(request):
 def lunch_view(request):
     recipes = Recipe.objects.filter(category="LUNCH")
     return render(request, 'category.html', {'recipes': recipes})
-    
+
 
 def dinner_view(request):
     recipes = Recipe.objects.filter(category="DINNER")
