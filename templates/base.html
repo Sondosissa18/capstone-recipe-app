@@ -9,7 +9,13 @@
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
         {% include "bootstrap.partial" %}
-
+    <script>
+	// Prevent dropdown menu from closing when click inside the form
+	$(document).on("click", ".navbar-right .dropdown-menu", function(e){
+		e.stopPropagation();
+	});
+     </script>
+     
     </head>
     <body>
     {% block content %}
