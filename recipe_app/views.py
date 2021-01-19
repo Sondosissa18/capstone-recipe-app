@@ -126,7 +126,8 @@ def recipe_upload(request):
                 items=data['items'],
                 timerequired=data['timerequired'],
                 instructions=data['instructions'],
-                image=data['image']
+                image=data['image'],
+                category=data['category']
             )
             return redirect(reverse("recipe_detail_view", args=[recipe_instance.id]))
     form = AddRecipeForm()
