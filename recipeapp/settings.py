@@ -121,11 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-# central
-TIME_ZONE = 'America/Chicago'
-# west
-# TIME_ZONE = 'America/Tijuana'
-
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
