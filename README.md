@@ -1,6 +1,6 @@
 # Recipe App Capstone
 
-Project contributers:
+Project contributors:
 Jessica Woods => jessica_woods53@yahoo.com
 Kevin Clark => kevinwilliamclark@gmail.com
 Shanquel Scott => shanquelh@yahoo.com
