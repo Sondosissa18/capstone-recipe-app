@@ -71,8 +71,11 @@ def index_view(request):
 
 def saved_recipe_view(request):
     user = request.user
+    user_id = request.user.id
     recipes = user.saved.all()
-    return render(request, 'saved_recipes.html', {'recipes': recipes})
+    personal_recipes = Recipe.objects.filter(author=user_id)
+    return render(request, 'saved_recipes.html', {'recipes': recipes, 
+                                                  'personal_recipes': personal_recipes})
 
 
 def helper(request, recipe_id, save):
