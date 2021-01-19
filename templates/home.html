@@ -66,6 +66,9 @@ h1, h3 {
   height: 100vh;
   background-size: cover;
 }
+h4 {
+    margin-left: 20px;
+}
 </style> 
 <div class="container text-center">
 <div class="card-deck">
@@ -73,10 +76,10 @@ h1, h3 {
     <div class="card text-center">
       <img src="{{ one_recipe.image.url }}" class="card-img-top">
         <div class="card-body">
-          <h4 class="card-title">{{ one_recipe.title }}</h4>
-          <p class="card-text">{{ one_recipe.author }}</p>
-          <p class="card-text">{{ one_recipe.items }}</p>
-          <p class="card-text">{{ one_recipe.description }}</p>
+          <h4 class="card-title">Title: {{ one_recipe.title }}</h4>
+          <p class="card-text">By: {{ one_recipe.author }}</p>
+          <p class="card-text">Items: {{ one_recipe.items }}</p>
+          <p class="card-text">Description: {{ one_recipe.description }}</p>
     </div>
     <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
   </div>
@@ -86,10 +89,10 @@ h1, h3 {
   <div class="card text-center">
     <img src="{{ two_recipe.image.url }}" class="card-img-top">
     <div class="card-body">
-      <h4 class="card-title">{{ two_recipe.title }}</h4>
-      <p class="card-text">{{ two_recipe.author }}</p>
-      <p class="card-text">{{ two_recipe.items }}</p>
-      <p class="card-text">{{ two_recipe.description }}</p>
+      <h4 class="card-title">Title: {{ two_recipe.title }}</h4>
+      <p class="card-text">By: {{ two_recipe.author }}</p>
+      <p class="card-text">Items: {{ two_recipe.items }}</p>
+      <p class="card-text">Description: {{ two_recipe.description }}</p>
     </div>
     <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
   </div>
@@ -99,10 +102,10 @@ h1, h3 {
   <div class="card text-center">
     <img src="{{ three_recipe.image.url }}" class="card-img-top">
     <div class="card-body">
-      <h4 class="card-title">{{ three_recipe.title }}</h4>
-      <p class="card-text">{{ three_recipe.author }}</p>
-      <p class="card-text">{{ three_recipe.items }}</p>
-      <p class="card-text">{{ three_recipe.description }}</p>
+      <h4 class="card-title">Title: {{ three_recipe.title }}</h4>
+      <p class="card-text">By: {{ three_recipe.author }}</p>
+      <p class="card-text">Items: {{ three_recipe.items }}</p>
+      <p class="card-text">Description: {{ three_recipe.description }}</p>
     </div>
     <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
   </div>
