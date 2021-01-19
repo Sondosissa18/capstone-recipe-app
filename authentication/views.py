@@ -1,14 +1,12 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect, redirect
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
 from recipe_user.models import Author
-from recipe_app.models import Recipe
-from django.contrib.auth.views import LogoutView
 from authentication.forms import LoginForm, SignupForm, ContactForm
 from django.views.generic import View
 from django.contrib import messages
 
 from django.core.mail import send_mail
+
 
 def login_view(request):
     if request.method == "POST":
@@ -16,7 +14,7 @@ def login_view(request):
         signup_form = SignupForm(request.POST)
         if Author.objects.filter(username=form.data["username"]).first() == None:
             if signup_form.is_valid():
-                
+
                 data = signup_form.cleaned_data
                 Author.objects.create_user(
                         username=data["username"], 
@@ -28,7 +26,6 @@ def login_view(request):
                     )
         if form.is_valid():
             data = form.cleaned_data
-            # if Author.objects.filter(username=data["username"]).first() == []:
             user = authenticate(
                 request, username=data["username"], password=data["password"]
             )
@@ -47,11 +44,10 @@ def login_view(request):
     return render(request, "login.html", {"form": form, "signup_form": signup_form})
 
 
-
 class Signup_view(View):
     def get(self, request):
         signup_form = SignupForm()
-        return render(request, "signup.html", {"signup_form": signup_form}) 
+        return render(request, "signup.html", {"signup_form": signup_form})
 
     def post(self, request):
         signup_form = request.POST
@@ -59,7 +55,7 @@ class Signup_view(View):
         if form.is_valid():
             data = form.cleaned_data
             user = Author.objects.create_user(
-                username=data["username"], 
+                username=data["username"],
                 email=data["email"],
                 password=data["password"]
             )
@@ -78,7 +74,6 @@ class Signup_view(View):
                 )
 
 
-
 def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
@@ -93,9 +88,10 @@ class ContactView(View):
     def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():
-            emailform = form.cleaned_data['emailform']
+            emailform = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
-            messageform = form.cleaned_data['messageform']
-            send_mail(subject, messageform, emailform,['sondosissa18@gmail.com', emailform ])
-            return render(request, "Contactpage.html", {"form": form})
-
+            messageform = form.cleaned_data['message']
+            send_mail(subject, messageform, emailform, ['recipeapp444@gmail.com', emailform])
+            return HttpResponseRedirect(
+                    request.GET.get("next", reverse("homepage"))
+                )

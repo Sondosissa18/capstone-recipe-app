@@ -1,9 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
-from recipe_app.models import Author, Recipe
-from django.views.generic.edit import CreateView
+from django.shortcuts import render, HttpResponseRedirect, reverse
 from notification.models import Notifications
-from recipe_app.models import Recipe
 from recipe_user.models import Message, Author
 from notification.forms import AddMessageForm
 import re

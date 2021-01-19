@@ -4,53 +4,6 @@
 
 {% include 'navigation.html' %}
 
-		{% comment %} <ul class="nav navbar-nav navbar-right">			
-			<li>
-				<a data-toggle="dropdown" class="dropdown-toggle" href="">Login</a>
-				<ul class="dropdown-menu form-wrapper">					
-					<li>
-						<form method="post" action="/login/">
-                        
-							<div class="or-seperator"><b>or</b></div>
-                            {% csrf_token %} 
-                            {{form.as_p}}
-							<input type="submit" class="btn btn-primary btn-block" value="Login">
-						</form>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
-				<ul class="dropdown-menu form-wrapper">					
-					<li>
-						<form method="post" enctype="multipart/form-data" action="/login/">
-
-							<p class="hint-text">Fill in this form to create your account!</p>
-                            
-                            
-                            {% csrf_token %} 
-                            {{signup_form.as_p}}
-							
-							<input type="submit" class="btn btn-primary btn-block" value="Sign up">
-						</form>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-
-<div class="jumbotron jumbotron-fluid bg-dark
-{% comment %} <div class="jumbotron jumbotron-fluid bg-dark
-">
-  <div class="jumbotron-background">
-	<img src="https://cdn.fstoppers.com/styles/large-16-9/s3/lead/2019/02/5_tips_for_shooting_large_food_flat_lays.jpg" class="center" style="width:100%;">
-  </div>
- </div>
-</nav> {% endcomment %}
-{% comment %} style="background-image: url({% static 'img1/img4.png' %}); object-fit: cover; width: 100%; background-repeat: no-repeat; height: 500px; background-size: cover;"/> {% endcomment %}
-
-
-
 {% load static %}
 <style>
 .login_container{

@@ -1,6 +1,4 @@
-/* * {
-  background-image: url('img1/contact.png');
-} */
+
 body {
     font-family: 'Varela Round', sans-serif;
 }
@@ -233,16 +231,3 @@ body {
     }
     
 }
-
-/* .my-login-form{
-    height: 100vh;
-    
-}
-
-.login_container{
-    background-image: url("{% static 'img1/loginbg.jpg' %}");
-    background-repeat: no-repeat; 
-    filter: blur(8px);
-  -webkit-filter: blur(8px);
-}
- */
