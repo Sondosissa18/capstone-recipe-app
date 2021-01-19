@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'navigation.html' %}
+<body>
+<style>
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+</style>
+<div class="row">
+<div class="col-sm-3 col-sm-offset-1">
+
+    <form enctype="multipart/form-data" method="post" action="">
+    {% csrf_token %} 
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-success" value="Submit" />
+    </div>
+    </form>
+</div>
+</div>
+</body>
+{% endblock %}

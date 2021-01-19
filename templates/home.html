@@ -1,66 +1,128 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'signup' %}">Signup</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">New Recipe</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
-<h1>Hey everyone!</h1>
-<br>
+{% block content %}
+{% comment %} {% include 'login.html' %} {% endcomment %}
+{% include 'navigation.html' %}
+<body>
 
+<h1>Here are some suggestions!</h1>
+<h3>Meal Categories</h3>
+<div style="margin-left: 30px;"> 
+    <button><a href="/breakfast/">Breakfast</a></button>
+    <button><a href="/lunch/">Lunch</a></button>
+    <button><a href="/dinner/">Dinner</a></button>
+    <button><a href="/dessert/">Dessert</a></button>
+    <button><a href="/snacks/">Snacks</a></button>
+</div>
 <br />
-{% if user.is_authenticated %} Welcome {{user.username }}! 
-{% endif %}
-            
+{% if user.is_authenticated %} 
+
+
 <ul>
 {% for message in messages %}
-{% comment %} <li>
+<li>
 <strong><a href="/messages/{{message.id}}">{{message.title}}</a></strong> 
-</li> {% endcomment %}
+</li> 
 {% endfor %}
 
 
+<br />
+
+<html>
+<style>
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Ubuntu', sans-serif;
+}
+img {
+  width: 225px;
+  height: 225px;
+  box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 10px;
+} 
+.card-body{
+  box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top:auto;
+  text-align: center;
+}
+.card{
+  margin: 10px 10px;
+  width: 225px;
+  height: 225px;
+  text-align: center;
+}
+h1, h3 {
+  margin-left: 30px;
+}
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+h4 {
+    margin-left: 20px;
+}
+</style> 
+<div class="container text-center">
+<div class="card-deck">
+  <div class="col-md-4">
+    <div class="card text-center">
+      <img src="{{ one_recipe.image.url }}" class="card-img-top">
+        <div class="card-body">
+          <h4 class="card-title">Title: {{ one_recipe.title }}</h4>
+          <p class="card-text">By: {{ one_recipe.author }}</p>
+          <p class="card-text">Items: {{ one_recipe.items }}</p>
+          <p class="card-text">Description: {{ one_recipe.description }}</p>
+    </div>
+    <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="card text-center">
+    <img src="{{ two_recipe.image.url }}" class="card-img-top">
+    <div class="card-body">
+      <h4 class="card-title">Title: {{ two_recipe.title }}</h4>
+      <p class="card-text">By: {{ two_recipe.author }}</p>
+      <p class="card-text">Items: {{ two_recipe.items }}</p>
+      <p class="card-text">Description: {{ two_recipe.description }}</p>
+    </div>
+    <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="card text-center">
+    <img src="{{ three_recipe.image.url }}" class="card-img-top">
+    <div class="card-body">
+      <h4 class="card-title">Title: {{ three_recipe.title }}</h4>
+      <p class="card-text">By: {{ three_recipe.author }}</p>
+      <p class="card-text">Items: {{ three_recipe.items }}</p>
+      <p class="card-text">Description: {{ three_recipe.description }}</p>
+    </div>
+    <button><a href="/recipes/{{one_recipe.id}}/">View Recipe</a></button>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+{% endif %}
+{% endblock content %} 
 
 
-{% comment %} ////////// list of recipes {% endcomment %}
-{% comment %} <h3> Messages: {{messages}}</h3>
-
-<br>
-{% for recipe in my_recipes %}
-
-<h4>Recipe : Id:{{recipe.id}}</h4>
-
-<ul>
-
-    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
-    title
-    <strong><li>{{ recipe.title }}</li></strong>
-    
-    <strong><li>{{ recipe.author }}</li></strong>
-
-    <strong><li>{{ recipe.description }}</li></strong>
-    <strong><li>{{ recipe.timerequired }}</li></strong>
-  </li>
-</ul>
-{% endfor %}  {% endcomment %}
 
 
 
 
 
-
-{% comment %} ///////// {% endcomment %}
-
-{% comment %} {% for recipe in following_recipe %}
-
-
-<h4>Recipe : Id:{{recipe.id}}</h4>
-
-<ul>
-
-    <li>Created by: <a href="/user/{{recipe.user.id}}/">{{recipe.user}}</a></li>
-    <strong><li>{{ recipe.text }}</li></strong>
-    <strong><li>{{ recipe.created_at }}</li></strong>
-  </li>
-</ul>
-{% endfor %} {% endcomment %}

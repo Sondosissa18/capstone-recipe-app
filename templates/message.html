@@ -1,22 +1,35 @@
-{% comment %} <button><a href="{% url 'home' %}">Home</a></button> |
-<button><a href="{%  url 'logout' %}">Login</a></button>|
-<button><a href="{%  url 'logout' %}">Logout</a></button>|
-<button><a href="{%  url 'add_recipe' %}">Recipe</a></button>|
-<button><a href="/user/{{user.id}}">Profile</a></button>|
-<button><a href="/messages/">Messages</a></button>  {% endcomment %}
+{% extends "base.html" %}
+{% load static %}
 
+{% block content %}
+{% include 'navigation.html' %}
 
-<h1>Messages Dashboard</h1>
+<body>
+<style>
+ body {
+  background-image: linear-gradient(#F9A26C, #EFEEEE, #9BD7D1, #325D79);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+h1, button {
+  margin-left: 30px;
+}
+</style>
+<h1>UnWraps:</h1>
+</br>
+<button>
+    <a href="/newmessage/">
+    Create UnWrap Message</a>
+</button>
 
-{% for message in messages %}
+{% for note in notes %}
+<h1>This message was sent by {{note.user.username}}</h1>
+{{note.text.author.username}}
+{{note.text.text}}
+{{note.created_at}}
 
-{{message.id}}
-
-{{message.author}}
-
-{{message.created_at}}
-
-
-{{message.text}}
-
+</body>
 {% endfor  %}
+{% endblock content %}
