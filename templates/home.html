@@ -1,19 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
+{% block nav %}
 {% include 'navigation.html' %}
+
+{% endblock %}
+{% block content %}
+
 <body>
 
 <h1>Here are some suggestions!</h1>
-<h3>Meal Categories</h3>
-<div style="margin-left: 30px;"> 
-    <button><a href="/breakfast/">Breakfast</a></button>
-    <button><a href="/lunch/">Lunch</a></button>
-    <button><a href="/dinner/">Dinner</a></button>
-    <button><a href="/dessert/">Dessert</a></button>
-    <button><a href="/snacks/">Snacks</a></button>
-</div>
+
 <br />
 {% if user.is_authenticated %} 
 
