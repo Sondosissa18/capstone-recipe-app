@@ -31,7 +31,7 @@
           <p class="card-text">By: {{ recipes.author }}</p>
           <p class="card-text">{{ recipes.description }}</p>
           <p class="card-text">Time required for this cake is: {{ recipes.timerequired }}</p>
-          <a href='/unsave/{{ recipes.id }}'>UnSave</a>&nbsp;&nbsp;&nbsp;<a href='/save/{{ recipes.id }}'>Save</a>
+          <a href='/save/{{ recipes.id }}'>Save</a>
         <br>
         <br>
         <button><a href="/editrecipe/{{recipes.id}}">Edit Your Own Recipe </a></button>
@@ -42,6 +42,6 @@
   </div>
 </body>
 </html>
-å
+
 {% endblock content %}
 
